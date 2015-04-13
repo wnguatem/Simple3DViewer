@@ -322,7 +322,13 @@ ${PCL_LIBS_DIR}/libpcl_2d.dylib
 #debug /Users/williamnguatem/projects/libs/shapelib-1.3.0/libshp.a
 #)
 
+IF(NOT BUILD_SHARED_LIBS)
+ADD_DEFINITIONS( -DANN_STATIC_LIB )
+ENDIF()
 
+ADD_LIBRARY (sc3dviewer ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES})
+
+target_link_libraries(sc3dviewer ${EXTRA_LIBS} ${KML_LIB} ${PCLDebuglibs} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB}) #${SOIL_LIB} ${PCL_LIBRARIES})#${OpenCV_LIBS} ${GLFW_LIB})
 ENDIF(APPLE)
 #		debug ${PCL_LIBRARIES}
 
@@ -331,13 +337,13 @@ ADD_DEFINITIONS( -DANN_STATIC_LIB )
 ENDIF()
 
 ##add_executable (sc3dviewer main.cxx ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES})
-#add_executable (sc3dviewer ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES})
-##target_link_libraries(sc3dviewer glfw ${OPENGL_LIBRARIES} ${ASSIMP_LIB} ${SOIL_LIB} ${GL3W})
+ADD_LIBRARY (sc3dviewer ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES})
+#target_link_libraries(sc3dviewer glfw ${OPENGL_LIBRARIES} ${ASSIMP_LIB} ${SOIL_LIB} ${GL3W})
 ##${OpenCV_LIBS} {GLFW_LIBRARIES})
-#target_link_libraries(sc3dviewer ${EXTRA_LIBS} ${KML_LIB} ${PCLDebuglibs} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB} #${SOIL_LIB} ${PCL_LIBRARIES})#${OpenCV_LIBS} ${GLFW_LIB})
-
-ADD_LIBRARY(sc3dviewer ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES} ${SOIL_LIB} ${EXTRA_LIBS} ${KML_LIB} ${PCLDebuglibs} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB})
-
+target_link_libraries(sc3dviewer ${EXTRA_LIBS} ${KML_LIB} ${PCLDebuglibs} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB}) #${SOIL_LIB} ${PCL_LIBRARIES})#${OpenCV_LIBS} ${GLFW_LIB})
+# IF(WIN32)
+#ADD_LIBRARY(sc3dviewer STATIC ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES} ${SOIL_LIB} ${KML_LIB} ${PCLDebuglibs} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB})
+#endif(WIN32)
 #TESTING_CREATE_MODULE_CONF(ann
  # INCLUDE_DIRS include
 #)

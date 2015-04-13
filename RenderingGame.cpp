@@ -162,7 +162,7 @@ namespace Rendering
 //        
 		mPointDemo = new ModelDemo(*this, *mCamera);
         //mPointDemo->setInputData(m_input_data);
-		mComponents.push_back(mPointDemo);
+		//mComponents.push_back(mPointDemo);
 //
 //		mKMLModel = new KMLModeler(*this, *mCamera);
 //		mComponents.push_back(mKMLModel);
@@ -175,7 +175,7 @@ namespace Rendering
        // mComponents.push_back(mSpotLightDemo);
         
         mFacadeFileModeler = new FacadeFileModeler(*this, *mCamera);
-        mComponents.push_back(mFacadeFileModeler);
+        //mComponents.push_back(mFacadeFileModeler);
         
       mSkybox = new Skybox(*this, *mCamera, "Maskonaive2_1024/posx.jpg", "Maskonaive2_1024/negx.jpg", "Maskonaive2_1024/posy.jpg", "Maskonaive2_1024/negy.jpg", "Maskonaive2_1024/posz.jpg", "Maskonaive2_1024/negz.jpg", 100.0f);
        //mComponents.push_back(mSkybox);
@@ -187,7 +187,7 @@ namespace Rendering
         //mComponents.push_back(mNormalMappingDemo);
         
         mTransparencyMappingDemo = new TransparencyMappingDemo(*this, *mCamera);
-        mComponents.push_back(mTransparencyMappingDemo);
+       // mComponents.push_back(mTransparencyMappingDemo);
         
         mEnvironmentMappingDemo = new EnvironmentMappingDemo(*this, *mCamera);
         //mComponents.push_back(mEnvironmentMappingDemo);
