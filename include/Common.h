@@ -83,6 +83,7 @@ typedef struct
 	long y;
 } POINT1;
 
+
 #define DeleteObject(object) if((object) != NULL) { delete object; object = NULL; }
 #define DeleteObjects(objects) if((objects) != NULL) { delete[] objects; objects = NULL; }
 

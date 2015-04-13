@@ -17,6 +17,14 @@
 #include "Common.h"
 #include "GameComponent.h"
 
+typedef struct
+{
+    glm::vec4 a;
+    glm::vec4 b;
+    glm::vec4 c;
+    glm::vec4 d;
+} QuadType;
+
 namespace Library
 {
 	class Camera;

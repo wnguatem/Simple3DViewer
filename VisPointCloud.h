@@ -39,6 +39,12 @@ namespace Rendering
 
 		virtual void Initialize() override;
 		virtual void Draw(const GameTime& gameTime) override;
+        
+        //virtual void setInputData(const std::string &input_data) override;
+        void setInputData(const std::string &input_data);
+        //{
+         //   m_input_data = input_data;
+        //}
 
 	private:
 		enum VertexAttribute
@@ -63,6 +69,7 @@ namespace Rendering
 		GLuint mIndexCount;
 
 		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr m_cloud;
+        std::string m_input_data;
 	};
 }
 #endif//_Model_Demo_H_

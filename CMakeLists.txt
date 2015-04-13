@@ -1,4 +1,4 @@
-PROJECT(cloud_viewer_util)
+PROJECT(simplecool3dviewer)
 
 
 # Try to Find OpenGL and GLUT silently
@@ -52,15 +52,20 @@ endif(APPLE AND GLUT_FOUND)
  #target_link_libraries(Test ${EXTRA_LIBS})
  IF(APPLE)
 set (LIB_FOLDER /Users/williamnguatem/projects/libs)
+ set(KML_INCLUDE /Users/williamnguatem/projects/libs/libkml/src)
+set(XERCES_INCLUDE /Users/williamnguatem/projects/libs/xerces-c-3.1.2/src)
 include_directories(/Users/williamnguatem/projects/libs/gl3w/include)
 include_directories(/Users/williamnguatem/projects/libs/glfw/include)
 include_directories(/Users/williamnguatem/projects/libs/glm)
 include_directories(/Users/williamnguatem/projects/libs/assimp/include)
-include_directories(/Users/williamnguatem/projects/libs/libSOIL)
+#include_directories(/Users/williamnguatem/projects/libs/libSOIL)
+include_directories(/Users/williamnguatem/projects/libs/Simple-OpenGL-Image-Library/src)
+ set(KML_INCLUDE /Users/williamnguatem/projects/libs/libkml/src)
 
  set(ASSIMP_LIB /Users/williamnguatem/projects/libs/assimp/build/code/Debug/libassimpd.dylib)
  set(GLFW_LIB /Users/williamnguatem/projects/libs/glfw/build/src/Debug/libglfw.3.1.dylib)
- set(SOIL_LIB /Users/williamnguatem/projects/libs/libSOIL/libSOIL.dylib)
+#set(SOIL_LIB /Users/williamnguatem/projects/libs/libSOIL/libSOIL.dylib)
+set(SOIL_LIB /Users/williamnguatem/projects/libs/Simple-OpenGL-Image-Library/build/Debug/libSOIL.a)
  set(GL3W /Users/williamnguatem/projects/libs/gl3w/build/Debug/libgl3w.a)
 ENDIF (APPLE)
 
@@ -100,7 +105,7 @@ add_definitions(${PCL_DEFINITIONS})
  
 
 #set modulname or set sub_system_name ${FI_INCLUDE_DIR}
-SET(renderer_util_HEADERS
+SET(simplecool3dviewer_HEADERS
     include/Common.h
     include/Game.h
     include/GameClock.h
@@ -136,13 +141,31 @@ SET(renderer_util_HEADERS
 	include/KMLModeler.h
 	include/CityGMLModeler.h
 	include/shapefil.h
+    include/TexturedQuad.h
+    include/Quad.h
+    include/Quads.h
+    include/SpotLightEffect.h
+    include/SpotLightDemo.h
+    include/NormalMappingDemo.h
+    include/NormalMappingEffect.h
+    include/FogEffect.h
+    include/TransparencyMappingDemo.h
+    include/FogDemo.h
+    include/TransparencyMappingEffect.h
+    include/EnvironmentMappingDemo.h
+    include/EnvironmentMappingEffect.h
+    include/LineStrip.h
 	RenderingGame.h
 	TexturedModelDemo.h
 VisPointCloud.h
 )
   
-SET(renderer_util_SOURCES
+SET(simplecool3dviewer_SOURCES
+    src/Quad.cpp
+    src/Quads.cpp
 	src/Game.cpp
+    src/TexturedQuad.cpp
+    src/LineStrip.cpp
    src/GameClock.cpp
    src/GameComponent.cpp
    src/GameTime.cpp
@@ -174,6 +197,16 @@ SET(renderer_util_SOURCES
    src/EsriShapeFileModeler.cpp
    src/KMLModeler.cpp
    src/CityGMLModeler.cpp
+   src/SpotLightEffect.cpp
+   src/SpotLightDemo.cpp
+   src/NormalMappingDemo.cpp
+   src/FogEffect.cpp
+   src/NormalMappingEffect.cpp
+   src/TransparencyMappingDemo.cpp
+   src/TransparencyMappingEffect.cpp
+   src/EnvironmentMappingDemo.cpp
+   src/EnvironmentMappingEffect.cpp
+   src/FogDemo.cpp
 	TexturedModelDemo.cpp
 	RenderingGame.cpp
 	Program.cpp
@@ -213,28 +246,97 @@ endif(WINDOWS)
 #include_directories(${PROJECT_SOURCE_DIR}/glfw/include/)
 
 
-#add_executable (renderer main.cxx ${renderer_util_HEADERS} ${renderer_util_SOURCES})
-add_executable (renderer_program ${renderer_util_HEADERS} ${renderer_util_SOURCES})
-#target_link_libraries(renderer_program glfw ${OPENGL_LIBRARIES} ${ASSIMP_LIB} ${SOIL_LIB} ${GL3W})
-#${OpenCV_LIBS} {GLFW_LIBRARIES})
-target_link_libraries(renderer_program ${EXTRA_LIBS} ${KML_LIB} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB} ${SOIL_LIB} ${PCL_LIBRARIES})#${OpenCV_LIBS} ${GLFW_LIB})
+#Force PCL to be used
+IF(APPLE)
+set(PCL_LIBS_DIR /Users/williamnguatem/projects/libs/pcl/build/lib/Debug)
+include_directories(/Users/williamnguatem/projects/libs/pcl/io/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/2d/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/common/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/features/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/filters/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/geometry/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/kdtree/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/ml/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/octree/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/recognition/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/registration/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/sample_consensus/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/search/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/segmentation/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/stereo/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/surface/include)
+include_directories(/Users/williamnguatem/projects/libs/pcl/tracking/include)
+include_directories(/opt/local/include)
+
+set( PCLReleaselibs
+${Boost_LIBRARIES}
+${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE}/Release/io_Release
+${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE}/model_segmentation_Release
+${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE}/vp_detection_Release
+${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE}/linear_algebra_Release
+${IVT_LIB_DIR}/lib/win32/ivt.lib
+)
+set( PCLDebuglibs
+${PCL_LIBS_DIR}/libpcl_search.dylib
+${PCL_LIBS_DIR}/libpcl_kdtree.dylib
+${PCL_LIBS_DIR}/libpcl_segmentation.dylib
+${PCL_LIBS_DIR}/libpcl_io.dylib
+${PCL_LIBS_DIR}/libpcl_tracking.dylib
+${PCL_LIBS_DIR}/libpcl_sample_consensus.dylib
+${PCL_LIBS_DIR}/libpcl_ml.dylib
+${PCL_LIBS_DIR}/libpcl_octree.dylib
+${PCL_LIBS_DIR}/libpcl_stereo.dylib
+${PCL_LIBS_DIR}/libpcl_surface.dylib
+${PCL_LIBS_DIR}/libpcl_registration.dylib
+${PCL_LIBS_DIR}/libpcl_recognition.dylib
+${PCL_LIBS_DIR}/libpcl_people.dylib
+${PCL_LIBS_DIR}/libpcl_features.dylib
+${PCL_LIBS_DIR}/libpcl_keypoints.dylib
+${PCL_LIBS_DIR}/libpcl_common.dylib
+${PCL_LIBS_DIR}/libpcl_filters.dylib
+${PCL_LIBS_DIR}/libpcl_io_ply.dylib
+${PCL_LIBS_DIR}/libpcl_2d.dylib
+ /Users/williamnguatem/projects/libs/shapelib-1.3.0/libshp.a
+)
+
+#set( PCLDebuglibs
+#debug ${PCL_LIBS_DIR}/libpcl_search.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_kdtree.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_segmentation.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_io.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_tracking.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_sample_consensus.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_ml.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_octree.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_stereo.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_surface.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_registration.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_recognition.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_people.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_features.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_keypoints.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_common.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_filters.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_io_ply.dylib
+#debug ${PCL_LIBS_DIR}/libpcl_2d.dylib
+#debug /Users/williamnguatem/projects/libs/shapelib-1.3.0/libshp.a
+#)
 
 
-#ADD_LIBRARY(renderer_util ${renderer_util_HEADERS} ${renderer_util_SOURCES} 
-				# ${PCL_IO_LIBRARIES} ${PCL_VISUALIZATION_LIBRARIES} 
-				# ${COMMON_LIB}/pcl_common-gd.lib 
-				# ${COMMON_LIB}/pcl_filters-gd.lib 
-				# ${CMINPACK}/cminpack_s-gd.lib	
-				# ${COMMON_LIB}/pcl_sample_consensus-gd.lib 
-				# ${COMMON_LIB}/pcl_segmentation-gd.lib
-				# ${COMMON_LIB}/pcl_kdtree-gd.lib
-				# ${COMMON_LIB}/pcl_visualization-gd.lib
-				# ${COMMON_LIB}/pcl_surface-gd.lib
-				# ${COMMON_LIB}/pcl_features-gd.lib
-				# ${FLANN}/flann_cpp_s-gd.lib
-				# ${BOOST_LIB}/libboost_date_time-vc100-mt-gd-1_46_1.lib
-				# ${BOOST_LIB}/libboost_thread-vc100-mt-gd-1_46_1.lib
+ENDIF(APPLE)
+#		debug ${PCL_LIBRARIES}
 
+IF(NOT BUILD_SHARED_LIBS)
+ADD_DEFINITIONS( -DANN_STATIC_LIB )
+ENDIF()
+
+##add_executable (sc3dviewer main.cxx ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES})
+#add_executable (sc3dviewer ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES})
+##target_link_libraries(sc3dviewer glfw ${OPENGL_LIBRARIES} ${ASSIMP_LIB} ${SOIL_LIB} ${GL3W})
+##${OpenCV_LIBS} {GLFW_LIBRARIES})
+#target_link_libraries(sc3dviewer ${EXTRA_LIBS} ${KML_LIB} ${PCLDebuglibs} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB} #${SOIL_LIB} ${PCL_LIBRARIES})#${OpenCV_LIBS} ${GLFW_LIB})
+
+ADD_LIBRARY(sc3dviewer ${simplecool3dviewer_HEADERS} ${simplecool3dviewer_SOURCES} ${SOIL_LIB} ${EXTRA_LIBS} ${KML_LIB} ${PCLDebuglibs} ${GL3W} ${XERCES_LIB} ${ESRI_SHAPEFILE_LIB} ${OPENGL_LIBRARIES} ${GLFW_LIB} ${ASSIMP_LIB})
 
 #TESTING_CREATE_MODULE_CONF(ann
  # INCLUDE_DIRS include

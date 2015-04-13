@@ -41,8 +41,8 @@ namespace Library
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"gamecontent\\Skybox.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"gamecontent\\Skybox.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"Skybox.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"Skybox.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		std::unique_ptr<Model> model(new Model(*mGame, "Sphere.obj"));
@@ -56,6 +56,7 @@ namespace Library
 		mSkyboxTexture = SOIL_load_OGL_cubemap(mPosXFilename.c_str(), mNegXFilename.c_str(), mPosYFilename.c_str(), mNegYFilename.c_str(), mPosZFilename.c_str(), mNegZFilename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 		if (mSkyboxTexture == 0)
 		{
+            std::cerr << "SOIL loading error: '" << SOIL_last_result() << "' (" << "cube_map-images" << ")" << std::endl;
 			throw GameException("SOIL_load_OGL_cubemap() failed.");
 		}
 

@@ -10,6 +10,19 @@
 #include "Model.h"
 #include "Mesh.h"
 
+#include <pcl/ModelCoefficients.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/filters/project_inliers.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/surface/concave_hull.h>
+#include <pcl/common/transforms.h>
+#include <pcl/features/feature.h>
+#include <pcl/features/normal_3d.h>
+
 
 using namespace glm;
 
@@ -19,7 +32,7 @@ namespace Rendering
 
 		ModelDemo::ModelDemo(Game& game, Camera& camera)
 		: DrawableGameComponent(game, camera), mShaderProgram(), mVertexArrayObject(0), mVertexBuffer(0),
-		mIndexBuffer(0), mWorldViewProjectionLocation(-1), mWorldMatrix(), mIndexCount()
+		mIndexBuffer(0), mWorldViewProjectionLocation(-1), mWorldMatrix(), mIndexCount(), m_input_data(game.getInputData())
 	{
 	}
 
@@ -47,8 +60,22 @@ namespace Rendering
 
 		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
 
-		pcl::io::loadPCDFile("TestData.pcd", *cloud);
+		pcl::io::loadPCDFile(m_input_data, *cloud);
+        
+        for (size_t i = 0; i < cloud->points.size(); i++) {
+            float tmp_val = cloud->points[i].y;
+            cloud->points[i].y = cloud->points[i].z;
+            cloud->points[i].z = tmp_val;
+        }
 
+        pcl::PointXYZRGBNormal min_pnt, max_pnt;
+        pcl::getMinMax3D(*cloud, min_pnt, max_pnt);
+        for (size_t i = 0; i < cloud->points.size(); i++)
+        {
+            cloud->points[i].y = cloud->points[i].y - min_pnt.y;
+        }
+        
+        
 		// Create the vertex and index buffers
 		//Mesh* mesh = model->Meshes().at(0);
 		//CreateVertexBuffer(*mesh, mVertexBuffer);
@@ -165,8 +192,8 @@ namespace Rendering
 			for (unsigned int i = 0; i < nr_points; i++)
 			{
 				vec3 position = vec3(cloud.points[i].x, cloud.points[i].y, cloud.points[i].z);
-				//vec4 color = vec4(cloud.points[i].r, cloud.points[i].g, cloud.points[i].b, cloud.points[i].a);
-				vec4 color = ColorHelper::RandomColor();
+				vec4 color = vec4(cloud.points[i].r, cloud.points[i].g, cloud.points[i].b, 1);
+				//vec4 color = ColorHelper::RandomColor();
 				vertices.push_back(VertexPositionColor(vec4(position.x, position.y, position.z, 1.0f), color));
 			}
 		}

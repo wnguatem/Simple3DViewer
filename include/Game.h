@@ -54,6 +54,10 @@ namespace Library
 
 		void AddKeyboardHandler(KeyboardHandler handler);
 		void RemoveKeyboardHandler(KeyboardHandler handler);
+        
+        
+        virtual std::string getInputData() = 0;
+        virtual void setInputData(const std::string &input_data) = 0;
 
 	protected:
 		virtual void InitializeWindow();

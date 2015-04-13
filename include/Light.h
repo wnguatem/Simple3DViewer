@@ -12,7 +12,7 @@
 
 
 #ifndef _Light_H_
-#define _Lights_H_
+#define _Light_H_
 
 #include "Common.h"
 #include "GameComponent.h"
@@ -36,5 +36,5 @@ namespace Library
 		glm::vec4 mColor;
 	};
 }
-#endif//_Lights_H_
+#endif//_Light_H_
 
