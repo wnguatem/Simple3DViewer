@@ -1,6 +1,7 @@
-#version 440 core
+#version 410 core
 
-layout (binding = 0) uniform samplerCube SkyboxTextureSampler;
+//layout (binding = 0) uniform samplerCube SkyboxTextureSampler;
+uniform samplerCube SkyboxTextureSampler;
 
 in VS_OUTPUT
 {

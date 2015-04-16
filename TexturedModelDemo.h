@@ -51,7 +51,11 @@ namespace Rendering
 		GLuint mVertexBuffer;
 		GLuint mIndexBuffer;
 		GLint mWorldViewProjectionLocation;
+		GLuint mColorTexture;
 		glm::mat4 mWorldMatrix;
+
+		std::string m_input_data;
+		std::wstring mContentFolder;
 	};
 }
 #endif//_CubeDemo_H

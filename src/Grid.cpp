@@ -20,14 +20,14 @@ namespace Library
 	Grid::Grid(Game& game, Camera& camera)
 		: DrawableGameComponent(game), mVertexArrayObject(0), mVertexBuffer(0),
 		  mPosition(Vector3Helper::Zero), mSize(DefaultSize), mScale(DefaultScale), mColor(DefaultColor),
-		  mWorldMatrix(), mVertexCount(0)
+		  mWorldMatrix(), mVertexCount(0), mContentFolder(game.getGameContentFolder())
 	{
 		mCamera = &camera;
 	}
 
 	Grid::Grid(Game& game, Camera& camera, GLuint size, GLuint scale, const vec4& color)
 		: DrawableGameComponent(game), mVertexArrayObject(0), mVertexBuffer(0),
-		  mPosition(Vector3Helper::Zero), mSize(size), mScale(scale), mColor(color), mWorldMatrix()
+		mPosition(Vector3Helper::Zero), mSize(size), mScale(scale), mColor(color), mWorldMatrix(), mContentFolder(game.getGameContentFolder())
 	{
 		mCamera = &camera;
 	}
@@ -94,8 +94,8 @@ namespace Library
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"BasicEffect.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"BasicEffect.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\BasicEffect.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\BasicEffect.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		InitializeGrid();

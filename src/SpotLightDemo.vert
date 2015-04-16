@@ -1,4 +1,4 @@
-#version 440 core
+#version 410 core
 
 uniform mat4 WorldViewProjection;
 uniform mat4 World;

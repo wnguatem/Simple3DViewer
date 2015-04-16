@@ -158,6 +158,20 @@
 #include "ShaderProgram.h"
 #include "VertexDeclarations.h"
 #include "VectorHelper.h"
+#include "SOIL.h"
+
+#include <pcl/ModelCoefficients.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/filters/project_inliers.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/surface/concave_hull.h>
+#include <pcl/common/transforms.h>
+#include <pcl/features/feature.h>
+#include <pcl/features/normal_3d.h>
 
 using namespace glm;
 
@@ -169,7 +183,7 @@ namespace Rendering
 
 	CubeDemo::CubeDemo(Game& game, Camera& camera)
 		: DrawableGameComponent(game, camera), mShaderProgram(), mVertexArrayObject(0), mVertexBuffer(0),
-		mIndexBuffer(0), mWorldViewProjectionLocation(-1), mWorldMatrix()
+		mIndexBuffer(0), mWorldViewProjectionLocation(-1), mWorldMatrix(), mContentFolder(game.getGameContentFolder()), m_input_data(game.getInputData())
 	{
 	}
 
@@ -186,22 +200,87 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"CubeDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"CubeDemo.frag"));
+		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\CubeDemo.vert"));
+		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\CubeDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\TexturedModelDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\TexturedModelDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
-		// Create the vertex buffer object
-		VertexPositionColor vertices[] =
-		{
-			VertexPositionColor(vec4(-1.0f, +1.0f, -1.0f, 1.0f), ColorHelper::Green),
-			VertexPositionColor(vec4(+1.0f, +1.0f, -1.0f, 1.0f), ColorHelper::Yellow),
-			VertexPositionColor(vec4(+1.0f, +1.0f, +1.0f, 1.0f), ColorHelper::White),
-			VertexPositionColor(vec4(-1.0f, +1.0f, +1.0f, 1.0f), ColorHelper::BlueGreen),
 
-			VertexPositionColor(vec4(-1.0f, -1.0f, +1.0f, 1.0f), ColorHelper::Blue),
-			VertexPositionColor(vec4(+1.0f, -1.0f, +1.0f, 1.0f), ColorHelper::Purple),
-			VertexPositionColor(vec4(+1.0f, -1.0f, -1.0f, 1.0f), ColorHelper::Red),
-			VertexPositionColor(vec4(-1.0f, -1.0f, -1.0f, 1.0f), ColorHelper::Black)
+		const std::string s(mContentFolder.begin(), mContentFolder.end());
+		std::string image_filename = s+"\\EarthComposite.jpg";
+		// Load the texture
+		//mColorTexture = SOIL_load_OGL_texture("C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\src\\EarthComposite.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB);
+		mColorTexture = SOIL_load_OGL_texture("C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\game_content\\IMG_8748.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB);
+		if (mColorTexture == 0)
+		{
+			std::cout << "SOIL loading error: "<< SOIL_last_result() << std::endl;
+			throw GameException("SOIL_load_OGL_texture() failed.");
+		}
+
+		//int img_width1, img_height1, channels;
+		//unsigned char* img1 = SOIL_load_image
+		//	(
+		//	image_filename.c_str(),
+		//	&img_width1, &img_height1, &channels,
+		//	SOIL_LOAD_L
+		//	);
+		//glGenTextures(1, &mColorTexture);
+		//glBindTexture(GL_TEXTURE_2D, mColorTexture);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width1, img_height1, 0, GL_RGB, GL_UNSIGNED_BYTE, img1);
+
+
+
+		//use the reference cloud to push everything to the correct ground plane
+		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud_0(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+		pcl::io::loadPCDFile(m_input_data, *cloud_0);
+		//force z to point upwards
+		for (size_t i = 0; i < cloud_0->points.size(); i++) {
+			float tmp_val = cloud_0->points[i].y;
+			cloud_0->points[i].y = cloud_0->points[i].z;
+			cloud_0->points[i].z = tmp_val;
+		}
+
+		pcl::PointXYZRGBNormal min_pnt, max_pnt;
+		pcl::getMinMax3D(*cloud_0, min_pnt, max_pnt);
+
+		float building_height = max_pnt.y - min_pnt.y;
+
+		// Create the vertex buffer object
+		VertexPositionTexture vertices[] =
+		{
+			//VertexPositionColor(vec4(-1.0f, +1.0f, -1.0f, 1.0f), ColorHelper::Green),
+			//VertexPositionColor(vec4(+1.0f, +1.0f, -1.0f, 1.0f), ColorHelper::Yellow),
+			//VertexPositionColor(vec4(+1.0f, +1.0f, +1.0f, 1.0f), ColorHelper::White),
+			//VertexPositionColor(vec4(-1.0f, +1.0f, +1.0f, 1.0f), ColorHelper::BlueGreen),
+
+			//VertexPositionColor(vec4(-1.0f, -1.0f, +1.0f, 1.0f), ColorHelper::Blue),
+			//VertexPositionColor(vec4(+1.0f, -1.0f, +1.0f, 1.0f), ColorHelper::Purple),
+			//VertexPositionColor(vec4(+1.0f, -1.0f, -1.0f, 1.0f), ColorHelper::Red),
+			//VertexPositionColor(vec4(-1.0f, -1.0f, -1.0f, 1.0f), ColorHelper::Black)
+
+			//only the colors given and is working too
+			//VertexPositionColor(vec4(min_pnt.x, building_height, -0.2f, 1.0f), ColorHelper::Green),
+			//VertexPositionColor(vec4(max_pnt.x, building_height, -0.2f, 1.0f), ColorHelper::Yellow),
+			//VertexPositionColor(vec4(max_pnt.x, building_height, +0.2f, 1.0f), ColorHelper::White),
+			//VertexPositionColor(vec4(min_pnt.x, building_height, +0.2f, 1.0f), ColorHelper::BlueGreen),
+
+			//VertexPositionColor(vec4(min_pnt.x, 0, +0.2f, 1.0f), ColorHelper::Blue),
+			//VertexPositionColor(vec4(max_pnt.x, 0, +0.2f, 1.0f), ColorHelper::Purple),
+			//VertexPositionColor(vec4(max_pnt.x, 0, -0.2f, 1.0f), ColorHelper::Red),
+			//VertexPositionColor(vec4(min_pnt.x, 0, -0.2f, 1.0f), ColorHelper::Black)
+
+			//only the texture
+			VertexPositionTexture(vec4(min_pnt.x, building_height, -0.2f, 1.0f), vec2(0.0f, 1.0f)),
+			VertexPositionTexture(vec4(max_pnt.x, building_height, -0.2f, 1.0f), vec2(1.0f, 1.0f)),
+			VertexPositionTexture(vec4(max_pnt.x, building_height, +0.2f, 1.0f), vec2(1.0f, 1.0f)),
+			VertexPositionTexture(vec4(min_pnt.x, building_height, +0.2f, 1.0f), vec2(0.0f, 1.0f)),
+
+			VertexPositionTexture(vec4(min_pnt.x, 0, +0.2f, 1.0f), vec2(0.0f, 0.0f)),
+			VertexPositionTexture(vec4(max_pnt.x, 0, +0.2f, 1.0f), vec2(1.0f, 0.0f)),
+			VertexPositionTexture(vec4(max_pnt.x, 0, -0.2f, 1.0f), vec2(1.0f, 0.0f)),
+			VertexPositionTexture(vec4(min_pnt.x, 0, -0.2f, 1.0f), vec2(1.0f, 0.0f))
 		};
 
 		glGenBuffers(1, &mVertexBuffer);
@@ -237,10 +316,10 @@ namespace Rendering
 		glGenVertexArrays(1, &mVertexArrayObject);
 		glBindVertexArray(mVertexArrayObject);
 
-		glVertexAttribPointer(VertexAttributePosition, 4, GL_FLOAT, GL_FALSE, sizeof(VertexPositionColor), (void*)offsetof(VertexPositionColor, Position));
+		glVertexAttribPointer(VertexAttributePosition, 4, GL_FLOAT, GL_FALSE, sizeof(VertexPositionTexture), (void*)offsetof(VertexPositionTexture, Position));
 		glEnableVertexAttribArray(VertexAttributePosition);
 
-		glVertexAttribPointer(VertexAttributeColor, 4, GL_FLOAT, GL_FALSE, sizeof(VertexPositionColor), (void*)offsetof(VertexPositionColor, Color));
+		glVertexAttribPointer(VertexAttributeColor, 4, GL_FLOAT, GL_FALSE, sizeof(VertexPositionTexture), (void*)offsetof(VertexPositionTexture, TextureCoordinates));
 		glEnableVertexAttribArray(VertexAttributeColor);
 
 		glBindVertexArray(0);
@@ -273,9 +352,27 @@ namespace Rendering
 
 
 
+		//glBindVertexArray(mVertexArrayObject);
+		//glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
+
+		//glUseProgram(mShaderProgram.Program());
+
+		//mat4 wvp = mCamera->ViewProjectionMatrix() * mWorldMatrix;
+		//glUniformMatrix4fv(mWorldViewProjectionLocation, 1, GL_FALSE, &wvp[0][0]);
+
+		//glEnable(GL_CULL_FACE);
+		//glFrontFace(GL_CCW);
+
+		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//glPointSize(80.0f);
+		////glDrawElements(GL_POINT, 36, GL_UNSIGNED_INT, 0);
+		//glBindVertexArray(0);
+
 		glBindVertexArray(mVertexArrayObject);
 		glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
+		glBindTexture(GL_TEXTURE_2D, mColorTexture);
 
 		glUseProgram(mShaderProgram.Program());
 
@@ -285,9 +382,8 @@ namespace Rendering
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CCW);
 
+		//glDrawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, 0);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		glPointSize(80.0f);
-		//glDrawElements(GL_POINT, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 }

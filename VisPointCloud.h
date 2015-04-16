@@ -70,6 +70,7 @@ namespace Rendering
 
 		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr m_cloud;
         std::string m_input_data;
+		std::wstring mContentFolder;
 	};
 }
 #endif//_Model_Demo_H_

@@ -117,7 +117,7 @@ namespace Rendering
 		RenderingGame::RenderingGame(const std::wstring& windowTitle)
         : Game(windowTitle),m_input_data(""),
 		mCamera(nullptr), mKeyboardHandler(nullptr),
-		mCubeDemo(nullptr), mPointDemo(nullptr),mTransparencyMappingDemo(nullptr),mEnvironmentMappingDemo(nullptr),mSkybox(nullptr),mFogDemo(nullptr)
+		mCubeDemo(nullptr), mPointDemo(nullptr), mTransparencyMappingDemo(nullptr), mEnvironmentMappingDemo(nullptr), mSkybox(nullptr), mFogDemo(nullptr), mGameContentFolder(L"")
 	{
         mDepthStencilBufferEnabled = true;
 	}
@@ -126,6 +126,11 @@ namespace Rendering
     {
         return m_input_data;
     }
+
+	std::wstring RenderingGame::getGameContentFolder()
+	{
+		return mGameContentFolder;
+	}
     
     void RenderingGame::setInputData(const std::string &input_data)
     {
@@ -140,6 +145,13 @@ namespace Rendering
 
 	void RenderingGame::Initialize()
 	{
+		//get the current dir
+		//boost::filesystem::path full_path(boost::filesystem::current_path());
+		//std::cout << "Current path is : " << full_path << std::endl;
+		//mGameContentFolder = full_path.wstring() + L"\\game_content";
+
+		mGameContentFolder = L"C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\game_content";
+
 		mCamera = new FirstPersonCamera(*this);
 		mComponents.push_back(mCamera);
 		//mServices.AddService(Camera::TypeIdClass(), mCamera);
@@ -163,6 +175,9 @@ namespace Rendering
 		mPointDemo = new ModelDemo(*this, *mCamera);
         //mPointDemo->setInputData(m_input_data);
 		//mComponents.push_back(mPointDemo);
+
+		mCubeDemo = new CubeDemo(*this, *mCamera);
+		//mComponents.push_back(mCubeDemo);
 //
 //		mKMLModel = new KMLModeler(*this, *mCamera);
 //		mComponents.push_back(mKMLModel);
@@ -175,7 +190,7 @@ namespace Rendering
        // mComponents.push_back(mSpotLightDemo);
         
         mFacadeFileModeler = new FacadeFileModeler(*this, *mCamera);
-        //mComponents.push_back(mFacadeFileModeler);
+        mComponents.push_back(mFacadeFileModeler);
         
       mSkybox = new Skybox(*this, *mCamera, "Maskonaive2_1024/posx.jpg", "Maskonaive2_1024/negx.jpg", "Maskonaive2_1024/posy.jpg", "Maskonaive2_1024/negy.jpg", "Maskonaive2_1024/posz.jpg", "Maskonaive2_1024/negz.jpg", 100.0f);
        //mComponents.push_back(mSkybox);
@@ -187,7 +202,7 @@ namespace Rendering
         //mComponents.push_back(mNormalMappingDemo);
         
         mTransparencyMappingDemo = new TransparencyMappingDemo(*this, *mCamera);
-       // mComponents.push_back(mTransparencyMappingDemo);
+        mComponents.push_back(mTransparencyMappingDemo);
         
         mEnvironmentMappingDemo = new EnvironmentMappingDemo(*this, *mCamera);
         //mComponents.push_back(mEnvironmentMappingDemo);

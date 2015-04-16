@@ -59,6 +59,8 @@ namespace Library
         virtual std::string getInputData() = 0;
         virtual void setInputData(const std::string &input_data) = 0;
 
+		virtual std::wstring getGameContentFolder() = 0;
+
 	protected:
 		virtual void InitializeWindow();
 		virtual void InitializeOpenGL();

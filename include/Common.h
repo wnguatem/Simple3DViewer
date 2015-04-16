@@ -51,6 +51,8 @@
 
 #if defined(_WIN64)
 
+
+
 /* Microsoft Windows (64-bit) */
 #define GLFW_EXPOSE_NATIVE_WIN32
 #define GLFW_EXPOSE_NATIVE_WGL

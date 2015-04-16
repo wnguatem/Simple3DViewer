@@ -8,6 +8,8 @@
 #include <iterator>
 #include <algorithm>
 #include <iostream>
+#include <boost/filesystem.hpp>
+
 
 namespace Library
 {
@@ -102,11 +104,16 @@ namespace Library
 			//throw std::exception("Could not open file.");
 		}
         
-        
-        
-        std::ifstream input( "C:\\Final.gif", std::ios::binary );
-        std::ofstream output( "C:\\myfile.gif", std::ios::binary );
-        
+		if (!file_a.good())
+		{
+			std::cout << "Can't find my file: " << converted_str << std::endl;
+			throw std::exception("Could not open file.");
+		}
+
+		if (!boost::filesystem::exists(converted_str.c_str()))
+		{
+			std::cout << "Can't find my file: "<<converted_str<< std::endl;
+		}        
         
 		file_a.seekg(0, std::ios::end);
 		unsigned int size = (unsigned int)file_a.tellg();

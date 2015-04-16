@@ -39,7 +39,7 @@ namespace Rendering
 	class ModelDemo;
     class QuadModeler;
 	class KMLModeler;
-    class Quad;
+    //class Quad;
     class Quads;
     class TexturedQuad;
     class SpotLightDemo;
@@ -48,6 +48,7 @@ namespace Rendering
     class EnvironmentMappingDemo;
     class FogDemo;
     class FacadeFileModeler;
+	class CubeDemo;
     
 
 	class RenderingGame : public Game
@@ -60,6 +61,8 @@ namespace Rendering
         
         virtual std::string getInputData() override;
         virtual void setInputData(const std::string &input_data) override;
+
+		virtual std::wstring getGameContentFolder() override;
         
         //todo: Refactor this to a class called vector data primitives and use a Rtti to determnig what is to be instatiated
         void addQuad(const glm::vec4 &vertices, const glm::vec3 &color);
@@ -83,7 +86,7 @@ namespace Rendering
 		ModelDemo* mPointDemo;
         QuadModeler* mQuadModel;
 		KMLModeler* mKMLModel;
-        Quad* mQuad;
+       // Quad* mQuad;
         Quads* mQuads;
         TexturedQuad* mTexturedQuad;
         SpotLightDemo* mSpotLightDemo;
@@ -97,6 +100,9 @@ namespace Rendering
         std::string m_input_data;
         pcl::PointCloud<pcl::PointXYZ>::Ptr m_quad_cloud;
         glm::vec4 m_quad_color;
+
+
+		std::wstring mGameContentFolder;
 	};
 }
 #endif//_Rendering_Game_H

@@ -64,6 +64,7 @@ namespace Library
 		glm::vec4 mColor;
 		glm::mat4 mWorldMatrix;
 		unsigned int mVertexCount;
+		std::wstring mContentFolder;
 	};
 }
 #endif//_Grid_H_

@@ -36,7 +36,7 @@ namespace Rendering
 		mIndexBuffer(0), mWorldMatrix(), mIndexCount(), mColorTexture(0), mAmbientLight(nullptr),
 		mDirectionalLight(nullptr), mSpecularColor(ColorHelper::Black), mSpecularPower(25.0f),
 		mFogColor(ColorHelper::CornflowerBlue), mFogStart(20.0f), mFogRange(40.0f), mAlphaMap(0),
-		mTrilinearSampler(0), mProxyModel(nullptr),m_input_data(game.getInputData())
+		mTrilinearSampler(0), mProxyModel(nullptr), m_input_data(game.getInputData()), mContentFolder(game.getGameContentFolder())
 	{
 	}
 
@@ -59,8 +59,8 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"TransparencyMappingDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"TransparencyMappingDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\TransparencyMappingDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\TransparencyMappingDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		// Create the vertex buffer
@@ -118,7 +118,7 @@ namespace Rendering
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* mIndexCount, indices, GL_STATIC_DRAW);
 
 		// Load the color texture
-		mColorTexture = SOIL_load_OGL_texture("Checkerboard.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+		mColorTexture = SOIL_load_OGL_texture("C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\game_content\\IMG_8748.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 		if (mColorTexture == 0)
 		{
 			throw GameException("SOIL_load_OGL_texture() failed.");
@@ -149,7 +149,7 @@ namespace Rendering
 
 		mDirectionalLight = new DirectionalLight(*mGame);
 
-		mProxyModel = new ProxyModel(*mGame, *mCamera, "DirectionalLightProxy.obj", 0.5f);
+		mProxyModel = new ProxyModel(*mGame, *mCamera, "C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\game_content\\DirectionalLightProxy.obj", 0.5f);
 		mProxyModel->Initialize();
 		mProxyModel->SetPosition(10.0f, 0.0, 0.0f);
 		mProxyModel->ApplyRotation(rotate(mat4(), 90.0f, Vector3Helper::Up));

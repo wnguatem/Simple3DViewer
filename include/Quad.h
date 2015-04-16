@@ -76,3 +76,5 @@ namespace Rendering
     };
 }
 #endif//_Quad_H_
+
+

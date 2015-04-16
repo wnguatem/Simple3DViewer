@@ -32,7 +32,8 @@ namespace Rendering
 
 		ModelDemo::ModelDemo(Game& game, Camera& camera)
 		: DrawableGameComponent(game, camera), mShaderProgram(), mVertexArrayObject(0), mVertexBuffer(0),
-		mIndexBuffer(0), mWorldViewProjectionLocation(-1), mWorldMatrix(), mIndexCount(), m_input_data(game.getInputData())
+		mIndexBuffer(0), mWorldViewProjectionLocation(-1), mWorldMatrix(), mIndexCount(), m_input_data(game.getInputData()), 
+		mContentFolder(game.getGameContentFolder())
 	{
 	}
 
@@ -49,8 +50,8 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"ModelDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"ModelDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\ModelDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\ModelDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		// Load the model

@@ -106,6 +106,15 @@ namespace Rendering
         pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr m_cloud;
         int mShapeType;
         std::string m_input_data;
+		std::wstring mContentFolder;
+
+		//main facade quad
+		void initMainFacadeQuad();
+		void CreateVertexBuffer(VertexPositionColor* vertices, GLuint vertexCount, GLuint& vertexBuffer);
+		GLuint mMFQuadVertexBuffer;
+		GLuint mMFQuadIndexCount;
+		GLuint mMFQuadIndexBuffer;
+		GLuint mMFQuadVertexArrayObject;
     };
 }
 #endif//_FacadeFileModeler_H_

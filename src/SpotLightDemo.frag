@@ -1,6 +1,7 @@
-#version 440 core
+#version 410 core
 
-layout (binding = 0) uniform sampler2D ColorTextureSampler;
+//layout (binding = 0) uniform sampler2D ColorTextureSampler;
+uniform sampler2D ColorTextureSampler;
 uniform vec4 AmbientColor;
 uniform vec4 LightColor;
 uniform vec3 LightPosition;

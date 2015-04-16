@@ -20,7 +20,7 @@ namespace Library
 		: DrawableGameComponent(game, camera),
 		  mModelFileName(modelFileName), mShaderProgram(), mVertexArrayObject(0), mVertexBuffer(0),
 		  mIndexBuffer(0), mIndexCount(0), mWorldMatrix(), mScaleMatrix(), mDisplayWireframe(true),
-		  mPosition(Vector3Helper::Zero), mDirection(Vector3Helper::Forward), mUp(Vector3Helper::Up), mRight(Vector3Helper::Right)
+		  mPosition(Vector3Helper::Zero), mDirection(Vector3Helper::Forward), mUp(Vector3Helper::Up), mRight(Vector3Helper::Right), mContentFolder(game.getGameContentFolder())
 	{
 		mScaleMatrix = glm::scale(mat4(), vec3(scale));
 	}
@@ -88,8 +88,8 @@ namespace Library
 		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"Content\\Effects\\BasicEffect.vert"));
 		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"Content\\Effects\\BasicEffect.frag"));
 
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"BasicEffect.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"BasicEffect.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\BasicEffect.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\BasicEffect.frag"));
 
 
 		mShaderProgram.BuildProgram(shaders);
