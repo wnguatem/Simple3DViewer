@@ -118,7 +118,7 @@ namespace Rendering
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* mIndexCount, indices, GL_STATIC_DRAW);
 
 		// Load the color texture
-		mColorTexture = SOIL_load_OGL_texture("C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\game_content\\IMG_8748.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+		mColorTexture = SOIL_load_OGL_texture("C:\\williamnguatem\\Projects\\Simple3DViewer\\game_content\\IMG_8748.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 		if (mColorTexture == 0)
 		{
 			throw GameException("SOIL_load_OGL_texture() failed.");
@@ -149,7 +149,7 @@ namespace Rendering
 
 		mDirectionalLight = new DirectionalLight(*mGame);
 
-		mProxyModel = new ProxyModel(*mGame, *mCamera, "C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\game_content\\DirectionalLightProxy.obj", 0.5f);
+		mProxyModel = new ProxyModel(*mGame, *mCamera, "C:\\williamnguatem\\Projects\\Simple3DViewer\\game_content\\DirectionalLightProxy.obj", 0.5f);
 		mProxyModel->Initialize();
 		mProxyModel->SetPosition(10.0f, 0.0, 0.0f);
 		mProxyModel->ApplyRotation(rotate(mat4(), 90.0f, Vector3Helper::Up));

@@ -150,7 +150,7 @@ namespace Rendering
 		//std::cout << "Current path is : " << full_path << std::endl;
 		//mGameContentFolder = full_path.wstring() + L"\\game_content";
 
-		mGameContentFolder = L"C:\\williamnguatem\\Projects\\LODGenerator\\Simple3DViewer\\game_content";
+		mGameContentFolder = L"C:\\williamnguatem\\Projects\\Simple3DViewer\\game_content";
 
 		mCamera = new FirstPersonCamera(*this);
 		mComponents.push_back(mCamera);
@@ -190,7 +190,7 @@ namespace Rendering
        // mComponents.push_back(mSpotLightDemo);
         
         mFacadeFileModeler = new FacadeFileModeler(*this, *mCamera);
-        mComponents.push_back(mFacadeFileModeler);
+       // mComponents.push_back(mFacadeFileModeler);
         
       mSkybox = new Skybox(*this, *mCamera, "Maskonaive2_1024/posx.jpg", "Maskonaive2_1024/negx.jpg", "Maskonaive2_1024/posy.jpg", "Maskonaive2_1024/negy.jpg", "Maskonaive2_1024/posz.jpg", "Maskonaive2_1024/negz.jpg", 100.0f);
        //mComponents.push_back(mSkybox);
