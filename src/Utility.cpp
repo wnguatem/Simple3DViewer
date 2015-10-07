@@ -107,7 +107,7 @@ namespace Library
 		if (!file_a.good())
 		{
 			std::cout << "Can't find my file: " << converted_str << std::endl;
-			throw std::exception("Could not open file.");
+			//throw std::exception("Could not open file.");
 		}
 
 		if (!boost::filesystem::exists(converted_str.c_str()))
