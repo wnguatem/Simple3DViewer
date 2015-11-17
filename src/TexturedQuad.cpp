@@ -53,8 +53,9 @@ namespace Rendering
         std::vector<ShaderDefinition> shaders;
      //   shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"FilteringModesDemo.vert"));
      //   shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"FilteringModesDemo.frag"));
-        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"AmbientLightingDemo.vert"));
-        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"AmbientLightingDemo.frag"));
+		const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + L"/AmbientLightingDemo.vert"));
+			shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + L"/AmbientLightingDemo.frag"));
         mShaderProgram.BuildProgram(shaders);
         
         float size = 10.0f;

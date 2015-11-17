@@ -20,6 +20,7 @@
 #include "GameComponent.h"
 #include <functional>
 
+
 namespace Library
 {
 	class Game //: public RTTI

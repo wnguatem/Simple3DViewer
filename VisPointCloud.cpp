@@ -23,7 +23,6 @@
 #include <pcl/features/feature.h>
 #include <pcl/features/normal_3d.h>
 
-
 using namespace glm;
 
 namespace Rendering

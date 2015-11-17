@@ -94,6 +94,7 @@
 #include "Grid.h"
 #include "TexturedModelDemo.h"
 #include "TexturedQuad.h"
+#include "TexturedMeshloader.h"
 #include "VisPointCloud.h"
 #include "QuadModeler.h"
 #include "KMLModeler.h"
@@ -162,6 +163,12 @@ namespace Rendering
 
 		mGrid = new Grid(*this, *mCamera);
 		mComponents.push_back(mGrid);
+
+		lodgenMesh = new TexturedMeshloader(*this, *mCamera);
+		mComponents.push_back(lodgenMesh);
+
+		mTexturedQuad = new TexturedQuad(*this, *mCamera);
+		//mComponents.push_back(mTexturedQuad);
         
         mTexturedQuad = new TexturedQuad(*this, *mCamera);
         //mComponents.push_back(mTexturedQuad);
@@ -202,7 +209,7 @@ namespace Rendering
         //mComponents.push_back(mNormalMappingDemo);
         
         mTransparencyMappingDemo = new TransparencyMappingDemo(*this, *mCamera);
-        mComponents.push_back(mTransparencyMappingDemo);
+        //mComponents.push_back(mTransparencyMappingDemo);
         
         mEnvironmentMappingDemo = new EnvironmentMappingDemo(*this, *mCamera);
         //mComponents.push_back(mEnvironmentMappingDemo);

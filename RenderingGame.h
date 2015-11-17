@@ -49,6 +49,7 @@ namespace Rendering
     class FogDemo;
     class FacadeFileModeler;
 	class CubeDemo;
+	class TexturedMeshloader;
     
 
 	class RenderingGame : public Game
@@ -96,6 +97,8 @@ namespace Rendering
         FogDemo* mFogDemo;
         EnvironmentMappingDemo* mEnvironmentMappingDemo;
         FacadeFileModeler* mFacadeFileModeler;
+
+		TexturedMeshloader* lodgenMesh;
         
         std::string m_input_data;
         pcl::PointCloud<pcl::PointXYZ>::Ptr m_quad_cloud;
