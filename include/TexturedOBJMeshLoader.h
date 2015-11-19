@@ -4,29 +4,46 @@
 #include "ShaderProgram.h"
 #include "VertexDeclarations.h"
 #include "Game.h"
+#include "Mesh.h"
+
+struct Face1
+{
+    float x[3], y[3], z[3];
+    float u[3], v[3]; // UV co-ordinates, normalised to [0..1]
+    int image_num; // best image assignment
+};
 
 namespace Library
 {
     class Mesh;
     class Light;
-    class TexturedOBJMeshloader;
 }
 
 using namespace Library;
 
 namespace Rendering
 {
-    class TexturedMeshloader : public DrawableGameComponent
+    class TexturedOBJMeshloader : public DrawableGameComponent
     {
         // RTTI_DECLARATIONS(FilteringModesDemo, DrawableGameComponent)
         
     public:
-        TexturedMeshloader(Game& game, Camera& camera);
-        TexturedMeshloader();
+        TexturedOBJMeshloader(Game& game, Camera& camera);
+        //TexturedOBJMeshloader(Game& game, Camera& camera, const Mesh &meshData, const std::string &texture_filename);
+        TexturedOBJMeshloader();
         
         virtual void Initialize() override;
         virtual void Draw(const GameTime& gameTime) override;
         virtual void Update(const GameTime& gameTime) override;
+        
+        void setTextureFile(const std::string &filename)
+        {
+            mTextureFilename = filename;
+        };
+        void setMesh(const Mesh &meshdata)
+        {
+            mMesh = meshdata;
+        }
         
     private:
         enum VertexAttribute
@@ -48,9 +65,11 @@ namespace Rendering
         
         static const std::string FilteringModeNames[];
         
-        ~TexturedMeshloader();
-        TexturedMeshloader(const TexturedMeshloader& rhs);
-        TexturedMeshloader& operator=(const TexturedMeshloader& rhs);
+        ~TexturedOBJMeshloader();
+        TexturedOBJMeshloader(const TexturedOBJMeshloader& rhs);
+        TexturedOBJMeshloader& operator=(const TexturedOBJMeshloader& rhs);
+        
+        void ReOrderVetexBuffer(const std::vector<Face1> &faces, const std::vector<unsigned int> &img_nr, std::vector<unsigned int> &nr_p_img, std::vector<VertexPositionTexture> &vertices, std::vector<unsigned int> &ids);
         
         //void CreateVertexBuffer(VertexPositionTexture* vertices, GLuint vertexCount, GLuint& vertexBuffer);
         void CreateVertexBuffer(const std::vector<VertexPositionTexture> &vertices, const std::vector<unsigned int> &nr_ver_per_img, std::vector<GLuint>& vertexBuffer);
@@ -69,10 +88,11 @@ namespace Rendering
         
         
         
-        std::vector<TexturedOBJMeshloader> mOBJMeshModel;
         
         
         
+        std::string mTextureFilename;
+        Mesh mMesh;
         
         void OnKey(int key, int scancode, int action, int mods);
         void OutputFilteringMode();
@@ -83,6 +103,7 @@ namespace Rendering
         ShaderProgram mShaderProgram;
         std::vector<GLuint> mVertexArrayObject;
         std::vector<GLuint> mVertexBuffer;
+        std::vector <Face1> m_faces;
         std::vector<GLuint> mIndexBuffer;
         GLint mWorldViewProjectionLocation;
         GLint mAmbientColorLocation;

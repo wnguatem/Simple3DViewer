@@ -39,6 +39,7 @@ namespace Library
     class ModelMaterial
     {
         friend class Model;
+        friend class Mesh;
 
     public:
         ModelMaterial(Model& model);

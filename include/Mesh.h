@@ -27,7 +27,8 @@ namespace Library
     class Mesh
     {
         friend class Model;
-
+        friend class ModelMaterial;
+        Mesh();
     public:
         ~Mesh();
 
@@ -45,11 +46,13 @@ namespace Library
         const std::vector<unsigned int>& Indices() const;
 
         void CreateIndexBuffer(GLuint& indexBuffer);
+         Mesh& operator=(const Mesh& rhs);
 
     private:
+        //Mesh() : mModel(nullptr) {}
         Mesh(Model& model, aiMesh& mesh);
         Mesh(const Mesh& rhs);
-        Mesh& operator=(const Mesh& rhs);
+        //Mesh& operator=(const Mesh& rhs);
 
         Model& mModel;
         ModelMaterial* mMaterial;

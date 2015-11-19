@@ -30,7 +30,7 @@ namespace Library
     class Model
     {
 		friend class Mesh;
-
+        Model();
     public:
         Model(Game& game, const std::string& filename, bool flipUVs = false);
 		Model(Game& game, const std::string& filename, int diff_d);

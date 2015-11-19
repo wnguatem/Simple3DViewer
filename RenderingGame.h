@@ -50,6 +50,7 @@ namespace Rendering
     class FacadeFileModeler;
 	class CubeDemo;
 	class TexturedMeshloader;
+    class TexturedOBJMeshloader;
     
 
 	class RenderingGame : public Game
@@ -99,6 +100,7 @@ namespace Rendering
         FacadeFileModeler* mFacadeFileModeler;
 
 		TexturedMeshloader* lodgenMesh;
+        TexturedOBJMeshloader* lodgenObjMesh;
         
         std::string m_input_data;
         pcl::PointCloud<pcl::PointXYZ>::Ptr m_quad_cloud;

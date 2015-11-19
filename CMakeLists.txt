@@ -206,6 +206,7 @@ SET(simplecool3dviewer_HEADERS
     include/EnvironmentMappingEffect.h
     include/LineStrip.h
 	include/TexturedMeshLoader.h
+	include/TexturedOBJMeshLoader.h
 	RenderingGame.h
 	TexturedModelDemo.h
 VisPointCloud.h
@@ -259,6 +260,7 @@ SET(simplecool3dviewer_SOURCES
    src/EnvironmentMappingEffect.cpp
    src/FogDemo.cpp
    src/TexturedMeshLoader.cpp
+   src/TexturedOBJMeshLoader.cpp
 	TexturedModelDemo.cpp
 	RenderingGame.cpp
 	Program.cpp

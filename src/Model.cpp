@@ -9,6 +9,8 @@
 
 namespace Library
 {
+    Model::Model(){}
+    
     Model::Model(Game& game, const std::string& filename, bool flipUVs)
 		: mGame(game), mMeshes(), mMaterials()
     {

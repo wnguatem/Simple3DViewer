@@ -6,6 +6,7 @@
 
 namespace Library
 {
+    Mesh::Mesh(){ mModel = 0; }
     Mesh::Mesh(Model& model, aiMesh& mesh)
         : mModel(model), mMaterial(nullptr), mName(mesh.mName.C_Str()), mVertices(), mNormals(), mTangents(), mBiNormals(), mTextureCoordinates(), mVertexColors(),
 		  mFaceCount(0), mIndices()
@@ -164,6 +165,7 @@ namespace Library
 
     void Mesh::CreateIndexBuffer(GLuint& indexBuffer)
     {
+        std::cout<<mIndices.size()<<std::endl;
 		glGenBuffers(1, &indexBuffer);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mIndices.size(), &mIndices[0], GL_STATIC_DRAW);
