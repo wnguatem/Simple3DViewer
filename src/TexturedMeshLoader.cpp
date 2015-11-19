@@ -1,5 +1,4 @@
 #include "TexturedMeshloader.h"
-#include "TexturedOBJMeshloader.h"
 #include "GameException.h"
 #include "ColorHelper.h"
 #include "Camera.h"
@@ -17,7 +16,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 
-const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+//const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
 
 
 std::wstring s2ws1(const std::string& str)
@@ -100,10 +100,14 @@ namespace Rendering
         
         std::vector<VertexPositionTexture> vertices;
         
-        std::string mesh_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.obj");
-        //        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
-        std::string g_dir("/Volumes/Volume/DataSet/LODGEN/trainingData/data101");
+        //std::string mesh_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.obj");
+        ////        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
+        //std::string g_dir("/Volumes/Volume/DataSet/LODGEN/trainingData/data101");
         
+		std::string mesh_file("M:/DataSet/LODGEN/trainingData/data101/5.obj");
+		//        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
+		std::string g_dir("M:/DataSet/LODGEN/trainingData/data101");
+	
         // Load the model
         std::unique_ptr<Model> model(new Model(*mGame, mesh_file, true));
         
@@ -123,20 +127,22 @@ namespace Rendering
             
             std::string img_filename = g_dir + "/" + ws2s1(text_filename) ;
             TexturedOBJMeshloader *tmp_obj_model = new TexturedOBJMeshloader(*mGame, *mCamera);
-            //tmp_obj_model->setMesh(mesh);
-            //tmp_obj_model->setTextureFile(img_filename);
+            tmp_obj_model->setMesh(mesh);
+            tmp_obj_model->setTextureFile(img_filename);
             //, *mesh, img_filename);
 //
   //          TexturedOBJMeshloader tmp_obj_model(*mGame, mCamera, *mesh,  img_filename);
-          //  mOBJMeshModel.push_back(*tmp_obj_model);
+			mOBJMeshModel.push_back(tmp_obj_model);
+   //         mOBJMeshModel.push_back(*tmp_obj_model);
            // tmp_obj_model->Initialize();
         }
         
-//        //initialization
-//        for (size_t i = 0; i < mOBJMeshModel.size(); i++)
-//        {
-//            mOBJMeshModel.at(i).Initialize();
-//        }
+        //initialization
+        for (size_t i = 0; i < mOBJMeshModel.size(); i++)
+        {
+			std::cout << "on initializing " << i << " of " << mOBJMeshModel.size() << " models" << std::endl;
+            mOBJMeshModel.at(i)->Initialize();
+        }
 //
 //        GLuint tmpvertexBuffer;
 //        CreateVertexBuffer(*mesh, tmpvertexBuffer);
@@ -283,7 +289,7 @@ namespace Rendering
         //initialization
         for (size_t i = 0; i < mOBJMeshModel.size(); i++)
         {
-         //   mOBJMeshModel.at(i).Update(gameTime);
+            mOBJMeshModel.at(i)->Update(gameTime);
         }
     }
     
@@ -310,7 +316,7 @@ namespace Rendering
         
         for (size_t i = 0; i < mOBJMeshModel.size(); i++)
         {
-           // mOBJMeshModel.at(i).UpdateAmbientLight(gameTime);
+            mOBJMeshModel.at(i)->UpdateAmbientLight(gameTime);
         }
         
     }
@@ -320,7 +326,7 @@ namespace Rendering
     {
         for (size_t i = 0; i < mOBJMeshModel.size(); i++)
         {
-           // mOBJMeshModel.at(i).Draw(gameTime);
+            mOBJMeshModel.at(i)->Draw(gameTime);
         }
 //
 //        for (size_t i = 0; i <  mIndexBuffer.size(); i++)
@@ -420,26 +426,17 @@ namespace Rendering
     
     void TexturedMeshloader::OnKey(int key, int scancode, int action, int mods)
     {
-//        if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-//        {
-//            FilteringMode activeMode = FilteringMode(mActiveFilteringMode + 1);
-//            if (activeMode >= FilteringModeEnd)
-//            {
-//                activeMode = (FilteringMode)(0);
-//            }
-//            
-//            mActiveFilteringMode = activeMode;
-//            
-//#if defined(DEBUG) || defined(_DEBUG)
-//            OutputFilteringMode();
-//#endif
-//        }
+		for (size_t i = 0; i < mOBJMeshModel.size(); i++)
+		{
+			mOBJMeshModel.at(i)->OnKey(key, scancode, action, mods);
+		}
     }
     
     void TexturedMeshloader::OutputFilteringMode()
     {
-//        std::wostringstream message;
-//        message << "Active Filtering Mode: " << FilteringModeNames[mActiveFilteringMode].c_str() << "\n";
-//        //OutputDebugString(message.str().c_str());
+		for (size_t i = 0; i < mOBJMeshModel.size(); i++)
+		{
+			mOBJMeshModel.at(i)->OutputFilteringMode();
+		}
     }
 }

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "TexturedOBJMeshloader.h"
 #include "DrawableGameComponent.h"
 #include "ShaderProgram.h"
 #include "VertexDeclarations.h"
@@ -9,7 +9,7 @@ namespace Library
 {
     class Mesh;
     class Light;
-    class TexturedOBJMeshloader;
+//    class TexturedOBJMeshloader;
 }
 
 using namespace Library;
@@ -69,7 +69,7 @@ namespace Rendering
         
         
         
-        std::vector<TexturedOBJMeshloader> mOBJMeshModel;
+        std::vector<TexturedOBJMeshloader*> mOBJMeshModel;
         
         
         

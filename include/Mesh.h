@@ -32,7 +32,7 @@ namespace Library
     public:
         ~Mesh();
 
-        Model& GetModel();
+        Model* GetModel();
         ModelMaterial* GetMaterial();
         const std::string& Name() const;
 
@@ -50,11 +50,12 @@ namespace Library
 
     private:
         //Mesh() : mModel(nullptr) {}
-        Mesh(Model& model, aiMesh& mesh);
+        Mesh(Model* model, aiMesh& mesh);
         Mesh(const Mesh& rhs);
         //Mesh& operator=(const Mesh& rhs);
 
-        Model& mModel;
+        //Model& mModel;
+		Model* mModel;
         ModelMaterial* mMaterial;
         std::string mName;
         std::vector<glm::vec3> mVertices;

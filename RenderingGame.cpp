@@ -152,7 +152,8 @@ namespace Rendering
 		//std::cout << "Current path is : " << full_path << std::endl;
 		//mGameContentFolder = full_path.wstring() + L"\\game_content";
 
-		mGameContentFolder = L"/Users/williamnguatem/projects/LODViewer/game_content";
+		//mGameContentFolder =  L"/Users/williamnguatem/projects/LODViewer/game_content";
+		mGameContentFolder = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
 
 		mCamera = new FirstPersonCamera(*this);
 		mComponents.push_back(mCamera);
@@ -166,10 +167,10 @@ namespace Rendering
 		mComponents.push_back(mGrid);
 
 		lodgenMesh = new TexturedMeshloader(*this, *mCamera);
-		//mComponents.push_back(lodgenMesh);
+		mComponents.push_back(lodgenMesh);
 
         lodgenObjMesh = new TexturedOBJMeshloader(*this, *mCamera);
-        mComponents.push_back(lodgenObjMesh);
+        //mComponents.push_back(lodgenObjMesh);
 
         
 

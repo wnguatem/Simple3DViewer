@@ -16,8 +16,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 
-const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
-
+//const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
 //
 //std::wstring s2ws1(const std::string& str)
 //{
@@ -182,11 +182,11 @@ namespace Rendering
     mIndexBuffer(0), mWorldViewProjectionLocation(-1), mWorldMatrix(), mIndexCount(), mColorTexture(0),
     mTextureSamplers(), mTextureSamplersByFilteringMode(), mActiveFilteringMode(FilteringModePoint), mKeyboardHandler(nullptr), mAmbientLight(nullptr)
     {
-        // Load the model
-        std::unique_ptr<Model> model(new Model(*mGame, "", true));
-        // Create the vertex and index buffers
- //       Mesh* mesh = model->Meshes().at(i);
-        mMesh = *model->Meshes().at(0);
+ //       // Load the model
+ //       std::unique_ptr<Model> model(new Model(*mGame, "", true));
+ //       // Create the vertex and index buffers
+ ////       Mesh* mesh = model->Meshes().at(i);
+ //       mMesh = *model->Meshes().at(0);
     }
 
 //    TexturedOBJMeshloader::TexturedOBJMeshloader(Game& game, Camera& camera)
@@ -252,9 +252,11 @@ namespace Rendering
         std::vector<ShaderDefinition> shaders;
         //   shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"FilteringModesDemo.vert"));
         //   shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"FilteringModesDemo.frag"));
-        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content+L"/AmbientLightingDemo.vert"));
-        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + L"/AmbientLightingDemo.frag"));
-        mShaderProgram.BuildProgram(shaders);
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + L"/AmbientLightingDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + L"/AmbientLightingDemo.frag"));
+		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + L"/FilteringModesDemo.vert"));
+		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + L"/FilteringModesDemo.frag"));
+		mShaderProgram.BuildProgram(shaders);
         
         float size = 10.0f;
         float halfSize = size / 2.0f;
@@ -269,7 +271,15 @@ namespace Rendering
         //};
         
         std::vector<VertexPositionTexture> vertices;
-        
+ 
+
+
+
+
+
+
+
+
 //        std::string mesh_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.obj");
 ////        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
 //        std::string g_dir("/Volumes/Volume/DataSet/LODGEN/trainingData/data101");
@@ -280,12 +290,12 @@ namespace Rendering
 //        // Create the vertex and index buffers
 //        Mesh* mesh = model->Meshes().at(6);
         GLuint tmpvertexBuffer;
-        CreateVertexBuffer(mMesh, tmpvertexBuffer);
+        CreateVertexBuffer(*mMesh, tmpvertexBuffer);
         mVertexBuffer.push_back(tmpvertexBuffer);
         GLuint tmpIdxBuffer;
-        mMesh.CreateIndexBuffer(tmpIdxBuffer);
+        mMesh->CreateIndexBuffer(tmpIdxBuffer);
         mIndexBuffer.push_back(tmpIdxBuffer);
-        mIndexCount.push_back(mMesh.Indices().size());
+        mIndexCount.push_back(mMesh->Indices().size());
         
 //        std::vector<std::string> img_file_names_;
 //        readAllImages1(g_dir, img_file_names_);
@@ -321,13 +331,14 @@ namespace Rendering
         }
         
         
-        mAmbientColorLocation = glGetUniformLocation(mShaderProgram.Program(), "AmbientColor");
-        if (mAmbientColorLocation == -1)
-        {
-            throw GameException("glGetUniformLocation() did not find uniform location.");
-        }
+		mAmbientColorLocation = glGetUniformLocation(mShaderProgram.Program(), "AmbientColor");
+		if (mAmbientColorLocation == -1)
+		{
+			throw GameException("glGetUniformLocation() did not find uniform location.");
+		}
         
-        std::wstring img_filename = game_content + L"/EarthComposite.jpg";
+		//std::wstring img_filename = "C:/williamnguatem/Projects/Simple3DViewer/game_content/EarthComposite.jpg";
+		//std::string img_filename = "M:/DataSet/LODGEN/trainingData/data101/3039.jpg";
         
         mColorTexture.resize(mIndexBuffer.size());
         for (size_t i = 0; i < mIndexBuffer.size(); i++)
@@ -342,7 +353,7 @@ namespace Rendering
 //               //text_filename = *(textures.second);
 //            }
             
-            std::string img_filename = mTextureFilename ;
+           std::string img_filename = mTextureFilename ;
             mColorTexture[i] = SOIL_load_OGL_texture(img_filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB);
             if (mColorTexture[i] == 0)
             {
@@ -454,14 +465,24 @@ namespace Rendering
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer[i]);
             glBindTexture(GL_TEXTURE_2D, mColorTexture[i]);
             
-            glBindSampler(0, mTextureSamplersByFilteringMode[mActiveFilteringMode]);
-            
-            glUseProgram(mShaderProgram.Program());
-            
-            mat4 wvp = mCamera->ViewProjectionMatrix() * mWorldMatrix;
-            glUniformMatrix4fv(mWorldViewProjectionLocation, 1, GL_FALSE, &wvp[0][0]);
-            glUniform4fv(mAmbientColorLocation, 1, &mAmbientLight->Color()[0]);
-            
+			glBindSampler(0, mTextureSamplersByFilteringMode[mActiveFilteringMode]);
+
+			glUseProgram(mShaderProgram.Program());
+
+			//mat4 wvp = mCamera->ViewProjectionMatrix() * mWorldMatrix;
+			//glUniformMatrix4fv(mWorldViewProjectionLocation, 1, GL_FALSE, &wvp[0][0]);
+
+            //glBindSampler(0, mTextureSamplersByFilteringMode[mActiveFilteringMode]);
+            //
+            //glUseProgram(mShaderProgram.Program());
+            //
+			mat4 wvp = mCamera->ViewProjectionMatrix() * mWorldMatrix;
+			glUniformMatrix4fv(mWorldViewProjectionLocation, 1, GL_FALSE, &wvp[0][0]);
+			glUniform4fv(mAmbientColorLocation, 1, &mAmbientLight->Color()[0]);
+
+			//mat4 wvp = mCamera->ViewProjectionMatrix() * mWorldMatrix;
+			//glUniformMatrix4fv(mWorldViewProjectionLocation, 1, GL_FALSE, &wvp[0][0]);
+
             glEnable(GL_CULL_FACE);
             glFrontFace(GL_CCW);
             
@@ -540,7 +561,7 @@ namespace Rendering
         return sizeof(VertexPositionTexture);
     }
     
-    
+     
     
     void TexturedOBJMeshloader::OnKey(int key, int scancode, int action, int mods)
     {

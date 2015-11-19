@@ -6,12 +6,12 @@
 
 namespace Library
 {
-    Mesh::Mesh(){ mModel = 0; }
-    Mesh::Mesh(Model& model, aiMesh& mesh)
+    //Mesh::Mesh(){ mModel = 0; }
+    Mesh::Mesh(Model* model, aiMesh& mesh)
         : mModel(model), mMaterial(nullptr), mName(mesh.mName.C_Str()), mVertices(), mNormals(), mTangents(), mBiNormals(), mTextureCoordinates(), mVertexColors(),
 		  mFaceCount(0), mIndices()
     {
-		mMaterial = mModel.Materials().at(mesh.mMaterialIndex);
+		mMaterial = mModel->Materials().at(mesh.mMaterialIndex);
 
         // Vertices
         mVertices.reserve(mesh.mNumVertices);
@@ -108,7 +108,7 @@ namespace Library
         }
     }
 
-    Model& Mesh::GetModel()
+    Model* Mesh::GetModel()
     {
         return mModel;
     }

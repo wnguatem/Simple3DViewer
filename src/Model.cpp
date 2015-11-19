@@ -9,7 +9,7 @@
 
 namespace Library
 {
-    Model::Model(){}
+    //Model::Model(){}
     
     Model::Model(Game& game, const std::string& filename, bool flipUVs)
 		: mGame(game), mMeshes(), mMaterials()
@@ -40,7 +40,7 @@ namespace Library
         {
             for (unsigned int i = 0; i < scene->mNumMeshes; i++)
             {	
-				Mesh* mesh = new Mesh(*this, *(scene->mMeshes[i]));
+				Mesh* mesh = new Mesh(this, *(scene->mMeshes[i]));
                 mMeshes.push_back(mesh);
             }
         }

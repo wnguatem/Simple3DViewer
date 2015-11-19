@@ -30,21 +30,27 @@ namespace Rendering
     public:
         TexturedOBJMeshloader(Game& game, Camera& camera);
         //TexturedOBJMeshloader(Game& game, Camera& camera, const Mesh &meshData, const std::string &texture_filename);
-        TexturedOBJMeshloader();
+		~TexturedOBJMeshloader();
+		TexturedOBJMeshloader(){};
         
         virtual void Initialize() override;
         virtual void Draw(const GameTime& gameTime) override;
         virtual void Update(const GameTime& gameTime) override;
         
+		void OnKey(int key, int scancode, int action, int mods);
+		void OutputFilteringMode();
+
+		void UpdateAmbientLight(const GameTime& gameTime);
+
         void setTextureFile(const std::string &filename)
         {
             mTextureFilename = filename;
         };
-        void setMesh(const Mesh &meshdata)
+        void setMesh(Mesh* meshdata)
         {
             mMesh = meshdata;
         }
-        
+        //
     private:
         enum VertexAttribute
         {
@@ -65,7 +71,6 @@ namespace Rendering
         
         static const std::string FilteringModeNames[];
         
-        ~TexturedOBJMeshloader();
         TexturedOBJMeshloader(const TexturedOBJMeshloader& rhs);
         TexturedOBJMeshloader& operator=(const TexturedOBJMeshloader& rhs);
         
@@ -92,12 +97,9 @@ namespace Rendering
         
         
         std::string mTextureFilename;
-        Mesh mMesh;
+        Mesh* mMesh;
         
-        void OnKey(int key, int scancode, int action, int mods);
-        void OutputFilteringMode();
-        
-        void UpdateAmbientLight(const GameTime& gameTime);
+
         
         std::vector<unsigned int> m_img_nr;
         ShaderProgram mShaderProgram;
