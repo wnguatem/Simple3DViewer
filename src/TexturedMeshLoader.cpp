@@ -16,9 +16,13 @@
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 
-//const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
-const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
+#ifdef __APPLE__
+const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+#endif
 
+#ifdef WIN32
+const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
+#endif
 
 std::wstring s2ws1(const std::string& str)
 {
@@ -104,9 +108,9 @@ namespace Rendering
         ////        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
         //std::string g_dir("/Volumes/Volume/DataSet/LODGEN/trainingData/data101");
         
-		std::string mesh_file("M:/DataSet/LODGEN/trainingData/data101/5.obj");
+		std::string mesh_file("/Volumes/Elements/DataSet/wind_detector_from4/data100/1.obj");
 		//        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
-		std::string g_dir("M:/DataSet/LODGEN/trainingData/data101");
+		std::string g_dir("/Volumes/Elements/DataSet/wind_detector_from4/data100");
 	
         // Load the model
         std::unique_ptr<Model> model(new Model(*mGame, mesh_file, true));

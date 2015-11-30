@@ -16,8 +16,13 @@
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 
-//const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+#ifdef __APPLE__
+const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+#endif
+
+#ifdef WIN32
 const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
+#endif
 //
 //std::wstring s2ws1(const std::string& str)
 //{

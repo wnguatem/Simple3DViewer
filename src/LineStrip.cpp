@@ -82,23 +82,23 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\ModelDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\ModelDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"/ModelDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"/ModelDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 
-		//use the reference cloud to push everything to the correct ground plane
-		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud_0(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
-		pcl::io::loadPCDFile(m_input_data, *cloud_0);
-		//force z to point upwards
-		for (size_t i = 0; i < cloud_0->points.size(); i++) {
-			float tmp_val = cloud_0->points[i].y;
-			cloud_0->points[i].y = cloud_0->points[i].z;
-			cloud_0->points[i].z = tmp_val;
-		}
-
-		pcl::PointXYZRGBNormal min_pnt, max_pnt;
-		pcl::getMinMax3D(*cloud_0, min_pnt, max_pnt);
+//		//use the reference cloud to push everything to the correct ground plane
+//		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud_0(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+//		pcl::io::loadPCDFile(m_input_data, *cloud_0);
+//		//force z to point upwards
+//		for (size_t i = 0; i < cloud_0->points.size(); i++) {
+//			float tmp_val = cloud_0->points[i].y;
+//			cloud_0->points[i].y = cloud_0->points[i].z;
+//			cloud_0->points[i].z = tmp_val;
+//		}
+//
+//		pcl::PointXYZRGBNormal min_pnt, max_pnt;
+//		pcl::getMinMax3D(*cloud_0, min_pnt, max_pnt);
 
 
 		std::vector <std::string> input_files;
@@ -106,7 +106,8 @@ namespace Rendering
 		namespace fs = boost::filesystem;
 
 		//fs::path targetDir("/Volumes/Elements/test_data/plummer-bonn/out/curves");
-		fs::path targetDir("N:\\test_data\\plummer-bonn\\out\\curves");
+		//fs::path targetDir("N:\\test_data\\plummer-bonn\\out\\curves");
+        fs::path targetDir("/Volumes/Elements/DataSet/wind_detector_from4/data100/1/out/predictions/nms_positives");
 
 		fs::directory_iterator it(targetDir), eod;
 
@@ -122,19 +123,19 @@ namespace Rendering
 		mNrStrips = input_files.size();
 
 		Eigen::Vector4f cloud_centroid_f(0, 0, 0, 0);
-		for (int j = 0; j < mNrStrips; j++)
-		{
-
-			//convert esri models to pcl in other to use pcl functions
-			pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-			pcl::io::loadPCDFile(input_files.at(j), *cloud);
-			Eigen::Vector4f cloud_centroid;
-			pcl::compute3DCentroid(*cloud, cloud_centroid);
-			cloud_centroid_f = cloud_centroid_f + cloud_centroid;
-		}
-		cloud_centroid_f(0) = cloud_centroid_f(0) / mNrStrips;
-		cloud_centroid_f(1) = cloud_centroid_f(1) / mNrStrips;
-		cloud_centroid_f(2) = cloud_centroid_f(2) / mNrStrips;
+//		for (int j = 0; j < mNrStrips; j++)
+//		{
+//
+//			//convert esri models to pcl in other to use pcl functions
+//			pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+//			pcl::io::loadPCDFile(input_files.at(j), *cloud);
+//			Eigen::Vector4f cloud_centroid;
+//			pcl::compute3DCentroid(*cloud, cloud_centroid);
+//			cloud_centroid_f = cloud_centroid_f + cloud_centroid;
+//		}
+//		cloud_centroid_f(0) = cloud_centroid_f(0) / mNrStrips;
+//		cloud_centroid_f(1) = cloud_centroid_f(1) / mNrStrips;
+//		cloud_centroid_f(2) = cloud_centroid_f(2) / mNrStrips;
 
 
 		//convert esri models to pcl in other to use pcl functions
@@ -154,11 +155,11 @@ namespace Rendering
 			mVertexCountStrip.at(j) = nr_vertices;
 
 			//force z to point upwards
-			for (size_t i = 0; i < cloud->points.size(); i++) {
-				float tmp_val = cloud->points[i].y;
-				cloud->points[i].y = cloud->points[i].z - min_pnt.y;
-				cloud->points[i].z = tmp_val;
-			}
+//			for (size_t i = 0; i < cloud->points.size(); i++) {
+//				float tmp_val = cloud->points[i].y;
+//				cloud->points[i].y = cloud->points[i].z - min_pnt.y;
+//				cloud->points[i].z = tmp_val;
+//			}
 
 			//Commented this out since we just want but to visualize what is passed in!!!
 
@@ -196,11 +197,11 @@ namespace Rendering
 			for (size_t i = 0; i < cloud->points.size(); i++)
 			{
 				cloud_indices[i] = i;
-				if (cloud->points[i].y < min_gr)
-				{
-					min_gr = cloud->points[i].y;
-					ind_gr = i;
-				}
+//				if (cloud->points[i].y < min_gr)
+//				{
+//					min_gr = cloud->points[i].y;
+//					ind_gr = i;
+//				}
 			}
 
 			GLuint indexBuffer;
@@ -436,7 +437,7 @@ namespace Rendering
 
 			glEnable(GL_CULL_FACE);
 			glFrontFace(GL_CCW);
-			glLineWidth(3.0f);
+			glLineWidth(10.0f);
 			glDrawArrays(GL_LINE_STRIP, 0, mIndexCountStrip.at(i));
 		}
 
