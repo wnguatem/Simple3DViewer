@@ -82,8 +82,8 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"/ModelDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"/ModelDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + "/ModelDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + "/ModelDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 
@@ -107,7 +107,7 @@ namespace Rendering
 
 		//fs::path targetDir("/Volumes/Elements/test_data/plummer-bonn/out/curves");
 		//fs::path targetDir("N:\\test_data\\plummer-bonn\\out\\curves");
-        fs::path targetDir("/Volumes/Elements/DataSet/wind_detector_from4/data100/1/out/predictions/nms_positives");
+        fs::path targetDir("N:/DataSet/wind_detector_from4/data100/1/out/predictions/nms_positives");
 
 		fs::directory_iterator it(targetDir), eod;
 
@@ -245,8 +245,8 @@ namespace Rendering
 		//just use thesame shader program
 		// Build the shader program
 		//        std::vector<ShaderDefinition> shaders;
-		//        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"ModelDemo.vert"));
-		//        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"ModelDemo.frag"));
+		//        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "ModelDemo.vert"));
+		//        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "ModelDemo.frag"));
 		//        mShaderProgram.BuildProgram(shaders);
 
 		// Load the model
@@ -308,8 +308,8 @@ namespace Rendering
 
 		// Build the shader program
 		//std::vector<ShaderDefinition> shaders;
-		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"TransparencyMappingDemo.vert"));
-		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"TransparencyMappingDemo.frag"));
+		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "TransparencyMappingDemo.vert"));
+		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "TransparencyMappingDemo.frag"));
 		//mShaderProgram.BuildProgram(shaders);
 
 		// Create the vertex buffer

@@ -30,16 +30,16 @@ namespace Library
 	public:
 		typedef std::function<void(int, int, int, int)> KeyboardHandler;
 		
-		//Game(HINSTANCE instance, const std::wstring& windowTitle);
-		Game(const std::wstring& windowTitle);
+		//Game(HINSTANCE instance, const std::string& windowTitle);
+		Game(const std::string& windowTitle);
 		~Game();
 
 		//HINSTANCE Instance() const;
 		GLFWwindow* Window() const;
 		//HWND Game::WindowHandle() const;
 		bool DepthBufferEnabled() const;
-		const std::wstring& WindowClass() const;
-		const std::wstring& WindowTitle() const;
+		const std::string& WindowClass() const;
+		const std::string& WindowTitle() const;
 		int ScreenWidth() const;
 		int ScreenHeight() const;
 		float AspectRatio() const;
@@ -60,7 +60,7 @@ namespace Library
         virtual std::string getInputData() = 0;
         virtual void setInputData(const std::string &input_data) = 0;
 
-		virtual std::wstring getGameContentFolder() = 0;
+		virtual std::string getGameContentFolder() = 0;
 
 	protected:
 		virtual void InitializeWindow();
@@ -73,7 +73,7 @@ namespace Library
 		static const unsigned int DefaultFrameRate;
 		
 		//HINSTANCE mInstance;
-		std::wstring mWindowTitle;		
+		std::string mWindowTitle;		
 		GLFWwindow* mWindow;
 		unsigned int mScreenWidth;
 		unsigned int mScreenHeight;

@@ -17,7 +17,7 @@ using namespace Rendering;
 //	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 //#endif
 //
-//	std::unique_ptr<RenderingGame> game(new RenderingGame(instance, L"OpenGL Essentials"));	
+//	std::unique_ptr<RenderingGame> game(new RenderingGame(instance, "OpenGL Essentials"));	
 //
 //	try
 //	{
@@ -38,7 +38,7 @@ int main ()
 //	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 //#endif
 //
-	std::unique_ptr<RenderingGame> game(new RenderingGame(L"LODViewer"));
+	std::unique_ptr<RenderingGame> game(new RenderingGame("LODViewer"));
 	try
 	{
 		game->Run();

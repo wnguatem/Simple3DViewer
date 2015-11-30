@@ -45,8 +45,8 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"SpotLightDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"SpotLightDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "SpotLightDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "SpotLightDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		// Create the vertex buffer

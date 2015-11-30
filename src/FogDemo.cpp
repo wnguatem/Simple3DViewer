@@ -45,8 +45,8 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"FogDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"FogDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "FogDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "FogDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		// Load the model

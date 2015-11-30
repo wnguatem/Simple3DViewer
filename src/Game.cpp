@@ -13,7 +13,7 @@ namespace Library
 
 	Game* Game::sInternalInstance = nullptr;
 
-	//Game::Game(HINSTANCE instance, const std::wstring& windowTitle)
+	//Game::Game(HINSTANCE instance, const std::string& windowTitle)
 	//	: mInstance(instance), mWindow(nullptr), mWindowTitle(windowTitle),
 	//	  mScreenWidth(DefaultScreenWidth), mScreenHeight(DefaultScreenHeight), mIsFullScreen(false),		  
 	//	  mMajorVersion(0), mMinorVersion(0),
@@ -23,7 +23,7 @@ namespace Library
 	//	GlobalServices.AddService(TypeIdClass(), &(*this));
 	//}
 
-	Game::Game(const std::wstring& windowTitle)
+	Game::Game(const std::string& windowTitle)
 		: mWindow(nullptr), mWindowTitle(windowTitle),
 		mScreenWidth(DefaultScreenWidth), mScreenHeight(DefaultScreenHeight), mIsFullScreen(false),
 		mMajorVersion(0), mMinorVersion(0),
@@ -53,7 +53,7 @@ namespace Library
 	//	return glfwGetWin32Window(mWindow);
 	//}
 
-	const std::wstring& Game::WindowTitle() const
+	const std::string& Game::WindowTitle() const
 	{
 		return mWindowTitle;
 	}

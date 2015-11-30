@@ -17,21 +17,21 @@ namespace Library
 	{
 		//WCHAR buffer[MAX_PATH];
 		//GetCurrentDirectory(MAX_PATH, buffer);
-		//std::wstring currentDirectoryW(buffer);
+		//std::string currentDirectoryW(buffer);
 
 		//return std::string(currentDirectoryW.begin(), currentDirectoryW.end());
 		return " Nichst";
 	}
 
-	std::wstring Utility::ExecutableDirectory()
+	std::string Utility::ExecutableDirectory()
 	{
 		//WCHAR buffer[MAX_PATH];
 		//GetModuleFileName(nullptr, buffer, MAX_PATH);
 		//PathRemoveFileSpec(buffer);
 
-		//return std::wstring(buffer);
+		//return std::string(buffer);
 		const char text[] = "olé";
-		return (L" ");
+		return (" ");
 	}
 
 	void Utility::GetFileName(const std::string& inputPath, std::string& filename)
@@ -87,7 +87,7 @@ namespace Library
 		}
 	}
 	
-	void Utility::LoadBinaryFile(const std::wstring& filename, std::vector<char>& data)
+	void Utility::LoadBinaryFile(const std::string& filename, std::vector<char>& data)
 	{
         //setup converter
         std::string converted_str;
@@ -96,7 +96,7 @@ namespace Library
      
  //       /use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
         //std::string converted_str = converter.to_bytes( filename);
-        //std::wstring filename_1 = filename;
+        //std::string filename_1 = filename;
         
         std::ifstream file_a(converted_str.c_str(), std::ios::binary);
 		if (file_a.bad())
@@ -128,25 +128,12 @@ namespace Library
 		file_a.close();
 	}
 
-	void Utility::ToWideString(const std::string& source, std::wstring& dest)
+	void Utility::ToWideString(const std::string& source, std::string& dest)
 	{
 		dest.assign(source.begin(), source.end());
 	}
 
-	std::wstring Utility::ToWideString(const std::string& source)
-	{
-		std::wstring dest;
-		dest.assign(source.begin(), source.end());
-
-		return dest;
-	}
-
-	void Utility::ToString(const std::wstring& source, std::string& dest)
-	{
-		dest.assign(source.begin(), source.end());
-	}
-
-	std::string Utility::ToString(const std::wstring& source)
+	std::string Utility::ToWideString(const std::string& source)
 	{
 		std::string dest;
 		dest.assign(source.begin(), source.end());
@@ -154,7 +141,20 @@ namespace Library
 		return dest;
 	}
 
-	void Utility::PathJoin(std::wstring& dest, const std::wstring& sourceDirectory, const std::wstring& sourceFile)
+	void Utility::ToString(const std::string& source, std::string& dest)
+	{
+		dest.assign(source.begin(), source.end());
+	}
+
+	std::string Utility::ToString(const std::string& source)
+	{
+		std::string dest;
+		dest.assign(source.begin(), source.end());
+
+		return dest;
+	}
+
+	void Utility::PathJoin(std::string& dest, const std::string& sourceDirectory, const std::string& sourceFile)
 	{
 		//WCHAR buffer[MAX_PATH];
 
@@ -162,7 +162,7 @@ namespace Library
 		//dest = buffer;
 	}
 
-	void Utility::GetPathExtension(const std::wstring& source, std::wstring& dest)
+	void Utility::GetPathExtension(const std::string& source, std::string& dest)
 	{
 		//dest = PathFindExtension(source.c_str());
 	}

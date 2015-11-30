@@ -25,7 +25,7 @@ namespace Library
 		}
 	}
 
-	GLuint ShaderProgram::CompileShaderFromFile(GLenum shaderType, const std::wstring& filename)
+	GLuint ShaderProgram::CompileShaderFromFile(GLenum shaderType, const std::string& filename)
 	{
 		std::vector<char> shaderSource;
 		Utility::LoadBinaryFile(filename, shaderSource);

@@ -17,28 +17,12 @@
 #include <boost/lexical_cast.hpp>
 
 #ifdef __APPLE__
-const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+const std::string game_content = "/Users/williamnguatem/projects/LODViewer/game_content";
 #endif
 
 #ifdef WIN32
-const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
+const std::string game_content = "C:/williamnguatem/Projects/Simple3DViewer/game_content";
 #endif
-
-std::wstring s2ws1(const std::string& str)
-{
-    typedef std::codecvt_utf8<wchar_t> convert_typeX;
-    std::wstring_convert<convert_typeX, wchar_t> converterX;
-    
-    return converterX.from_bytes(str);
-}
-
-std::string ws2s1(const std::wstring& wstr)
-{
-    typedef std::codecvt_utf8<wchar_t> convert_typeX;
-    std::wstring_convert<convert_typeX, wchar_t> converterX;
-    
-    return converterX.to_bytes(wstr);
-}
 
 using namespace glm;
 
@@ -84,10 +68,10 @@ namespace Rendering
         
         // Build the shader program
         std::vector<ShaderDefinition> shaders;
-        //   shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"FilteringModesDemo.vert"));
-        //   shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"FilteringModesDemo.frag"));
-        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content+L"/AmbientLightingDemo.vert"));
-        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + L"/AmbientLightingDemo.frag"));
+        //   shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "FilteringModesDemo.vert"));
+        //   shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "FilteringModesDemo.frag"));
+        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content+"/AmbientLightingDemo.vert"));
+        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + "/AmbientLightingDemo.frag"));
         mShaderProgram.BuildProgram(shaders);
         
         float size = 10.0f;
@@ -108,9 +92,11 @@ namespace Rendering
         ////        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
         //std::string g_dir("/Volumes/Volume/DataSet/LODGEN/trainingData/data101");
         
-		std::string mesh_file("/Volumes/Elements/DataSet/wind_detector_from4/data100/1.obj");
+		std::string mesh_file("N:/DataSet/wind_detector_from4/data100/1.obj");
+		//std::string mesh_file("M:/DataSet/data19/1.obj");
+	
 		//        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
-		std::string g_dir("/Volumes/Elements/DataSet/wind_detector_from4/data100");
+		std::string g_dir("N:/DataSet/wind_detector_from4/data100");
 	
         // Load the model
         std::unique_ptr<Model> model(new Model(*mGame, mesh_file, true));
@@ -120,16 +106,16 @@ namespace Rendering
             // Create the vertex and index buffers
             Mesh* mesh = model->Meshes().at(i);
             // Load the texture
-            std::map<TextureType, std::vector<std::wstring>*> tmp_tex_file =  mesh->GetMaterial()->Textures();
+            std::map<TextureType, std::vector<std::string>*> tmp_tex_file =  mesh->GetMaterial()->Textures();
             
-            std::wstring text_filename ;
-            for (std::pair<TextureType, std::vector<std::wstring>*> textures : tmp_tex_file)
+            std::string text_filename ;
+            for (std::pair<TextureType, std::vector<std::string>*> textures : tmp_tex_file)
             {
                 text_filename = textures.second->at(0);
                 //text_filename = *(textures.second);
             }
             
-            std::string img_filename = g_dir + "/" + ws2s1(text_filename) ;
+            std::string img_filename = g_dir + "/" + text_filename ;
             TexturedOBJMeshloader *tmp_obj_model = new TexturedOBJMeshloader(*mGame, *mCamera);
             tmp_obj_model->setMesh(mesh);
             tmp_obj_model->setTextureFile(img_filename);
@@ -198,16 +184,16 @@ namespace Rendering
 //            throw GameException("glGetUniformLocation() did not find uniform location.");
 //        }
 //        
-//        std::wstring img_filename = game_content + L"/EarthComposite.jpg";
+//        std::string img_filename = game_content + "/EarthComposite.jpg";
 //        
 //        mColorTexture.resize(mIndexBuffer.size());
 //        for (size_t i = 0; i < mIndexBuffer.size(); i++)
 //        {
 //            // Load the texture
-//            std::map<TextureType, std::vector<std::wstring>*> tmp_tex_file =  mesh->GetMaterial()->Textures();
+//            std::map<TextureType, std::vector<std::string>*> tmp_tex_file =  mesh->GetMaterial()->Textures();
 //            
-//            std::wstring text_filename ;
-//            for (std::pair<TextureType, std::vector<std::wstring>*> textures : tmp_tex_file)
+//            std::string text_filename ;
+//            for (std::pair<TextureType, std::vector<std::string>*> textures : tmp_tex_file)
 //            {
 //                text_filename = textures.second->at(0);
 //                //text_filename = *(textures.second);

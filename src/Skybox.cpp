@@ -41,8 +41,8 @@ namespace Library
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"Skybox.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"Skybox.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "Skybox.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "Skybox.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		std::unique_ptr<Model> model(new Model(*mGame, "Sphere.obj"));

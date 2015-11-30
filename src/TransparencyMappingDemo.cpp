@@ -59,8 +59,8 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\TransparencyMappingDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\TransparencyMappingDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + "\\TransparencyMappingDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + "\\TransparencyMappingDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 		// Create the vertex buffer

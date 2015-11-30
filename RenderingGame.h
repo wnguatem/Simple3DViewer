@@ -59,12 +59,12 @@ namespace Rendering
 
 
 	public:
-		RenderingGame(const std::wstring& windowTitle);
+		RenderingGame(const std::string& windowTitle);
         
         virtual std::string getInputData() override;
         virtual void setInputData(const std::string &input_data) override;
 
-		virtual std::wstring getGameContentFolder() override;
+		virtual std::string getGameContentFolder() override;
         
         //todo: Refactor this to a class called vector data primitives and use a Rtti to determnig what is to be instatiated
         void addQuad(const glm::vec4 &vertices, const glm::vec3 &color);
@@ -107,7 +107,7 @@ namespace Rendering
         glm::vec4 m_quad_color;
 
 
-		std::wstring mGameContentFolder;
+		std::string mGameContentFolder;
 	};
 }
 #endif//_Rendering_Game_H

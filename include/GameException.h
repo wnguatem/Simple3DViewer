@@ -26,7 +26,7 @@ namespace Library
 		GameException(const char* const& message);
 
 		//HRESULT HR() const;
-		std::wstring whatw() const;
+		std::string whatw() const;
 
 	//private:
 	//	HRESULT mHR;

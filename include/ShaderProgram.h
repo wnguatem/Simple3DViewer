@@ -22,7 +22,7 @@ namespace Library
 	class Model;
 	class Mesh;
 
-	typedef std::pair<GLenum, std::wstring> ShaderDefinition;
+	typedef std::pair<GLenum, std::string> ShaderDefinition;
 
 	class ShaderProgram //: public RTTI
 	{
@@ -32,7 +32,7 @@ namespace Library
 		ShaderProgram();
 		virtual ~ShaderProgram();
 		
-		static GLuint CompileShaderFromFile(GLenum shaderType, const std::wstring& filename);
+		static GLuint CompileShaderFromFile(GLenum shaderType, const std::string& filename);
 
 		Variable* operator[](const std::string& variableName);
 

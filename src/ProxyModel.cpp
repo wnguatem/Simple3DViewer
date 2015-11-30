@@ -85,11 +85,11 @@ namespace Library
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"Content\\Effects\\BasicEffect.vert"));
-		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"Content\\Effects\\BasicEffect.frag"));
+		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "Content\\Effects\\BasicEffect.vert"));
+		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "Content\\Effects\\BasicEffect.frag"));
 
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + L"\\BasicEffect.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + L"\\BasicEffect.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, mContentFolder + "\\BasicEffect.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, mContentFolder + "\\BasicEffect.frag"));
 
 
 		mShaderProgram.BuildProgram(shaders);

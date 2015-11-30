@@ -29,8 +29,8 @@ namespace Library
             unsigned int textureCount = material->GetTextureCount(mappedTextureType);
             if (textureCount > 0)
             {
-                std::vector<std::wstring>* textures = new std::vector<std::wstring>();
-                mTextures.insert(std::pair<TextureType, std::vector<std::wstring>*>(textureType, textures));
+                std::vector<std::string>* textures = new std::vector<std::string>();
+                mTextures.insert(std::pair<TextureType, std::vector<std::string>*>(textureType, textures));
 
                 textures->reserve(textureCount);
                 for (unsigned int textureIndex = 0; textureIndex < textureCount; textureIndex++)
@@ -38,7 +38,7 @@ namespace Library
                     aiString path;
                     if (material->GetTexture(mappedTextureType, textureIndex, &path) == AI_SUCCESS)
                     {
-                        std::wstring wPath;
+                        std::string wPath;
                         Utility::ToWideString(path.C_Str(), wPath);
 
                         textures->push_back(wPath);
@@ -50,7 +50,7 @@ namespace Library
 
     ModelMaterial::~ModelMaterial()
     {
-        for (std::pair<TextureType, std::vector<std::wstring>*> textures : mTextures)
+        for (std::pair<TextureType, std::vector<std::string>*> textures : mTextures)
         {
             DeleteObject(textures.second);
         }
@@ -66,7 +66,7 @@ namespace Library
         return mName;
     }
 
-    const std::map<TextureType, std::vector<std::wstring>*>& ModelMaterial::Textures() const
+    const std::map<TextureType, std::vector<std::string>*>& ModelMaterial::Textures() const
     {
         return mTextures;
     }

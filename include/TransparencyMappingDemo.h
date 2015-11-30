@@ -56,7 +56,7 @@ namespace Rendering
 		GLuint mTrilinearSampler;
         
         std::string m_input_data;
-		std::wstring mContentFolder;
+		std::string mContentFolder;
 
 		ProxyModel* mProxyModel;
 	};

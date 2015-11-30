@@ -106,7 +106,7 @@ namespace Rendering
         pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr m_cloud;
         int mShapeType;
         std::string m_input_data;
-		std::wstring mContentFolder;
+		std::string mContentFolder;
 
 		//main facade quad
 		void initMainFacadeQuad();

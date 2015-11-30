@@ -43,8 +43,8 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"EnvironmentMappingDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"EnvironmentMappingDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "EnvironmentMappingDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "EnvironmentMappingDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 		
 		// Load the model

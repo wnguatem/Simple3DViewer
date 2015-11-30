@@ -7,10 +7,10 @@ namespace Library
 	{
 	}
 
-	std::wstring GameException::whatw() const
+	std::string GameException::whatw() const
 	{
 		std::string whatString(what());
-		std::wstring whatw;
+		std::string whatw;
 		whatw.assign(whatString.begin(), whatString.end());
 
 		return whatw;

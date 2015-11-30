@@ -17,25 +17,25 @@
 #include <boost/lexical_cast.hpp>
 
 #ifdef __APPLE__
-const std::wstring game_content = L"/Users/williamnguatem/projects/LODViewer/game_content";
+const std::string game_content = "/Users/williamnguatem/projects/LODViewer/game_content";
 #endif
 
 #ifdef WIN32
-const std::wstring game_content = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
+const std::string game_content = "C:/williamnguatem/Projects/Simple3DViewer/game_content";
 #endif
 //
-//std::wstring s2ws1(const std::string& str)
+//std::string s2ws1(const std::string& str)
 //{
 //    typedef std::codecvt_utf8<wchar_t> convert_typeX;
-//    std::wstring_convert<convert_typeX, wchar_t> converterX;
+//    std::string_convert<convert_typeX, wchar_t> converterX;
 //    
 //    return converterX.from_bytes(str);
 //}
 //
-//std::string ws2s1(const std::wstring& wstr)
+//std::string ws2s1(const std::string& wstr)
 //{
 //    typedef std::codecvt_utf8<wchar_t> convert_typeX;
-//    std::wstring_convert<convert_typeX, wchar_t> converterX;
+//    std::string_convert<convert_typeX, wchar_t> converterX;
 //    
 //    return converterX.to_bytes(wstr);
 //}
@@ -255,12 +255,12 @@ namespace Rendering
         
         // Build the shader program
         std::vector<ShaderDefinition> shaders;
-        //   shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"FilteringModesDemo.vert"));
-        //   shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"FilteringModesDemo.frag"));
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + L"/AmbientLightingDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + L"/AmbientLightingDemo.frag"));
-		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + L"/FilteringModesDemo.vert"));
-		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + L"/FilteringModesDemo.frag"));
+        //   shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "FilteringModesDemo.vert"));
+        //   shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "FilteringModesDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + "/AmbientLightingDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + "/AmbientLightingDemo.frag"));
+		//shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + "/FilteringModesDemo.vert"));
+		//shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + "/FilteringModesDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
         
         float size = 10.0f;
@@ -342,17 +342,17 @@ namespace Rendering
 			throw GameException("glGetUniformLocation() did not find uniform location.");
 		}
         
-		//std::wstring img_filename = "C:/williamnguatem/Projects/Simple3DViewer/game_content/EarthComposite.jpg";
+		//std::string img_filename = "C:/williamnguatem/Projects/Simple3DViewer/game_content/EarthComposite.jpg";
 		//std::string img_filename = "M:/DataSet/LODGEN/trainingData/data101/3039.jpg";
         
         mColorTexture.resize(mIndexBuffer.size());
         for (size_t i = 0; i < mIndexBuffer.size(); i++)
         {
             // Load the texture
-//  std::map<TextureType, std::vector<std::wstring>*> tmp_tex_file =  mesh->GetMaterial()->Textures();
+//  std::map<TextureType, std::vector<std::string>*> tmp_tex_file =  mesh->GetMaterial()->Textures();
 //            
-//            std::wstring text_filename ;
-//            for (std::pair<TextureType, std::vector<std::wstring>*> textures : tmp_tex_file)
+//            std::string text_filename ;
+//            for (std::pair<TextureType, std::vector<std::string>*> textures : tmp_tex_file)
 //            {
 //               text_filename = textures.second->at(0);
 //               //text_filename = *(textures.second);

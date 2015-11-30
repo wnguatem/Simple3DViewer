@@ -12,7 +12,7 @@
 //{
 //	////RTTI_DEFINITIONS(RenderingGame)
 //
-//	//RenderingGame::RenderingGame(HINSTANCE instance, const std::wstring& windowTitle)
+//	//RenderingGame::RenderingGame(HINSTANCE instance, const std::string& windowTitle)
 //	//	:  Game(instance, windowTitle),
 //	//	mCamera(nullptr), mKeyboardHandler(nullptr),
 //	//	mTexturedModelDemo(nullptr)
@@ -20,7 +20,7 @@
 //	//	mDepthStencilBufferEnabled = true;
 //	//}
 //
-//	RenderingGame::RenderingGame(const std::wstring& windowTitle)
+//	RenderingGame::RenderingGame(const std::string& windowTitle)
 //	: Game(windowTitle),
 //	mCamera(nullptr), mKeyboardHandler(nullptr),
 //	mTexturedModelDemo(nullptr)
@@ -116,10 +116,10 @@ namespace Rendering
 {
 	//RTTI_DEFINITIONS(RenderingGame)
 
-		RenderingGame::RenderingGame(const std::wstring& windowTitle)
+		RenderingGame::RenderingGame(const std::string& windowTitle)
         : Game(windowTitle),m_input_data(""),
 		mCamera(nullptr), mKeyboardHandler(nullptr),
-		mCubeDemo(nullptr), mPointDemo(nullptr), mTransparencyMappingDemo(nullptr), mEnvironmentMappingDemo(nullptr), mSkybox(nullptr), mFogDemo(nullptr), mGameContentFolder(L"")
+		mCubeDemo(nullptr), mPointDemo(nullptr), mTransparencyMappingDemo(nullptr), mEnvironmentMappingDemo(nullptr), mSkybox(nullptr), mFogDemo(nullptr), mGameContentFolder("")
 	{
         mDepthStencilBufferEnabled = true;
 	}
@@ -129,7 +129,7 @@ namespace Rendering
         return m_input_data;
     }
 
-	std::wstring RenderingGame::getGameContentFolder()
+	std::string RenderingGame::getGameContentFolder()
 	{
 		return mGameContentFolder;
 	}
@@ -150,15 +150,15 @@ namespace Rendering
 		//get the current dir
 		//boost::filesystem::path full_path(boost::filesystem::current_path());
 		//std::cout << "Current path is : " << full_path << std::endl;
-		//mGameContentFolder = full_path.wstring() + L"\\game_content";
+		//mGameContentFolder = full_path.string() + "\\game_content";
 
         
 #ifdef __APPLE__
- mGameContentFolder =  L"/Users/williamnguatem/projects/LODViewer/game_content";
+ mGameContentFolder =  "/Users/williamnguatem/projects/LODViewer/game_content";
 #endif
         
 #ifdef WIN32
- mGameContentFolder = L"C:/williamnguatem/Projects/Simple3DViewer/game_content";
+ mGameContentFolder = "C:/williamnguatem/Projects/Simple3DViewer/game_content";
 #endif
 
 		mCamera = new FirstPersonCamera(*this);
@@ -197,7 +197,7 @@ namespace Rendering
 		//mComponents.push_back(mPointDemo);
 
 		mCubeDemo = new CubeDemo(*this, *mCamera);
-		//mComponents.push_back(mCubeDemo);
+		mComponents.push_back(mCubeDemo);
 //
 //		mKMLModel = new KMLModeler(*this, *mCamera);
 //		mComponents.push_back(mKMLModel);

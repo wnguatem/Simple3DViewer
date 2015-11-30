@@ -1,18 +1,4 @@
-//******************************************************************************
-//\par		Simple3DViewer - Simple Intelligent 3D Object Viewer
-//\file		CubeDemo.h
-//\author	William Nguatem
-//\note		Copyright (C) 
-//\note		Bundeswehr University Munich
-//\note		Institute of Applied Computer Science
-//\note		Chair of Photogrammetry and Remote Sensing
-//\note		Neubiberg, Germany
-//\since		2015/03/26 
-//******************************************************************************/
-
-
-#ifndef _Cube_Demo_H_
-#define _Cube_Demo_H_
+#pragma once
 
 #include "DrawableGameComponent.h"
 #include "ShaderProgram.h"
@@ -25,7 +11,7 @@ namespace Rendering
 	{
 		//RTTI_DECLARATIONS(CubeDemo, DrawableGameComponent)
 
-	public:
+	public:		
 		CubeDemo(Game& game, Camera& camera);
 		~CubeDemo();
 
@@ -51,11 +37,6 @@ namespace Rendering
 		GLuint mVertexBuffer;
 		GLuint mIndexBuffer;
 		GLint mWorldViewProjectionLocation;
-		GLuint mColorTexture;
 		glm::mat4 mWorldMatrix;
-
-		std::string m_input_data;
-		std::string mContentFolder;
 	};
 }
-#endif//_CubeDemo_H

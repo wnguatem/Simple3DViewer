@@ -49,13 +49,13 @@ namespace Rendering
 
 		// Build the shader programs
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"NormalMappingDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"NormalMappingDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "NormalMappingDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "NormalMappingDemo.frag"));
 		mNormalMappingEffect.BuildProgram(shaders);
 
 		shaders.clear();
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, L"FogDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, L"FogDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "FogDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "FogDemo.frag"));
 		mFogEffect.BuildProgram(shaders);
 
 		// Load the color texture

@@ -68,7 +68,7 @@ namespace Library
         glm::vec3 mUp;
         glm::vec3 mRight;
 
-		std::wstring mContentFolder;
+		std::string mContentFolder;
 	};
 }
 #endif//_Proxy_Model_H_
