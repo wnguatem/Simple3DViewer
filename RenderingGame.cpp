@@ -108,6 +108,7 @@
 #include "Skybox.h"
 #include "FogDemo.h"
 #include "LineStrip.h"
+#include "MeshModelLoader.h"
 
 
 using namespace glm;
@@ -173,11 +174,13 @@ namespace Rendering
 		mComponents.push_back(mGrid);
 
 		lodgenMesh = new TexturedMeshloader(*this, *mCamera);
-		mComponents.push_back(lodgenMesh);
+		//mComponents.push_back(lodgenMesh);
 
         lodgenObjMesh = new TexturedOBJMeshloader(*this, *mCamera);
         //mComponents.push_back(lodgenObjMesh);
 
+		mMeshModelLoader = new MeshModelLoader(*this, *mCamera);
+		mComponents.push_back(mMeshModelLoader);
         
 
 		mTexturedQuad = new TexturedQuad(*this, *mCamera);
@@ -210,7 +213,7 @@ namespace Rendering
        // mComponents.push_back(mSpotLightDemo);
         
         mFacadeFileModeler = new FacadeFileModeler(*this, *mCamera);
-        mComponents.push_back(mFacadeFileModeler);
+       //mComponents.push_back(mFacadeFileModeler);
         
       mSkybox = new Skybox(*this, *mCamera, "Maskonaive2_1024/posx.jpg", "Maskonaive2_1024/negx.jpg", "Maskonaive2_1024/posy.jpg", "Maskonaive2_1024/negy.jpg", "Maskonaive2_1024/posz.jpg", "Maskonaive2_1024/negz.jpg", 100.0f);
        //mComponents.push_back(mSkybox);

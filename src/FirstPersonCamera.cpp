@@ -9,9 +9,14 @@ namespace Library
 {
     //RTTI_DEFINITIONS(FirstPersonCamera)
 
-	const float FirstPersonCamera::DefaultRotationRate = 0.050f;
-	const float FirstPersonCamera::DefaultMovementRate = 0.25;// 1.5;// 5.0;// 10.0f;
-	const float FirstPersonCamera::DefaultMouseSensitivity = 0.20;//s 1.0f;
+	const float FirstPersonCamera::DefaultRotationRate = 0.0250f;
+	const float FirstPersonCamera::DefaultMovementRate = 0.125;// 1.5;// 5.0;// 10.0f;
+	const float FirstPersonCamera::DefaultMouseSensitivity = 0.10;//s 1.0f;
+
+	const int min_y = 0.0f; // the lowest location to place the camera
+	const int max_y = 300.0f; // the lowest location to place the camera
+
+
 
     FirstPersonCamera::FirstPersonCamera(Game& game)
         : Camera(game),
@@ -125,7 +130,12 @@ namespace Library
 
 		if (glfwGetKey(mGame->Window(), GLFW_KEY_DOWN))
 		{
-			mPosition.y -= 0.5f;
+			if ((mPosition.y - 0.5f) < min_y)
+			{
+				mPosition.y = 0.0f;
+			}
+			else
+				mPosition.y -= 0.5f;
 		}
 
 		if (glfwGetKey(mGame->Window(), GLFW_KEY_LEFT))

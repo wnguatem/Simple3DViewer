@@ -208,6 +208,7 @@ SET(simplecool3dviewer_HEADERS
 	include/TexturedMeshLoader.h
 	include/TexturedOBJMeshLoader.h
 	include/CubeDemo.h
+	include/MeshModelLoader.h
 	RenderingGame.h
 	TexturedModelDemo.h
 VisPointCloud.h
@@ -263,6 +264,7 @@ SET(simplecool3dviewer_SOURCES
    src/TexturedMeshLoader.cpp
    src/TexturedOBJMeshLoader.cpp
    src/CubeDemo.cpp
+   src/MeshModelLoader.cpp
 	TexturedModelDemo.cpp
 	RenderingGame.cpp
 	Program.cpp

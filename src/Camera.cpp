@@ -8,7 +8,7 @@ using namespace glm;
 namespace Library
 {
 	//RTTI_DEFINITIONS(Camera)
-	const float Camera::DefaultFieldOfView =  45.0f;
+	const float Camera::DefaultFieldOfView = 45.0f;// 45.0f;
 	const float Camera::DefaultNearPlaneDistance = 1;// 0.01f;
 	const float Camera::DefaultFarPlaneDistance = 1000.0f;
 

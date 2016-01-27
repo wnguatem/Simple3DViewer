@@ -51,6 +51,7 @@ namespace Rendering
 	class CubeDemo;
 	class TexturedMeshloader;
     class TexturedOBJMeshloader;
+	class MeshModelLoader;
     
 
 	class RenderingGame : public Game
@@ -98,6 +99,7 @@ namespace Rendering
         FogDemo* mFogDemo;
         EnvironmentMappingDemo* mEnvironmentMappingDemo;
         FacadeFileModeler* mFacadeFileModeler;
+		MeshModelLoader *mMeshModelLoader;
 
 		TexturedMeshloader* lodgenMesh;
         TexturedOBJMeshloader* lodgenObjMesh;

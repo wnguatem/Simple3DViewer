@@ -92,11 +92,11 @@ namespace Rendering
         ////        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
         //std::string g_dir("/Volumes/Volume/DataSet/LODGEN/trainingData/data101");
         
-		std::string mesh_file("N:/DataSet/wind_detector_from4/data100/1.obj");
+		std::string mesh_file("Q:/DataSet/wind_detector_from4/data100/1.obj");
 		//std::string mesh_file("M:/DataSet/data19/1.obj");
 	
 		//        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
-		std::string g_dir("N:/DataSet/wind_detector_from4/data100");
+		std::string g_dir("Q:/DataSet/wind_detector_from4/data100");
 	
         // Load the model
         std::unique_ptr<Model> model(new Model(*mGame, mesh_file, true));

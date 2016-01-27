@@ -50,7 +50,7 @@ namespace Rendering
 
 
 		pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-		pcl::io::loadPCDFile("N:/DataSet/wind_detector_from4/data100/1/out/predictions/nms_positives/predicted_curve_boundary_0_good_0.pcd", *cloud);
+		pcl::io::loadPCDFile("Q:/DataSet/wind_detector_from4/data100/1/out/predictions/nms_positives/predicted_curve_boundary_0_good_0.pcd", *cloud);
 
 		pcl::PointXYZ minPt, maxPt;
 		pcl::getMinMax3D(*cloud, minPt, maxPt);
