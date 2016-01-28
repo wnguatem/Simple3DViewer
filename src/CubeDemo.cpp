@@ -41,11 +41,20 @@ namespace Rendering
 	void CubeDemo::Initialize()
 	{
 		//SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
+        
+#ifdef __APPLE__
+        const std::string game_content = "/Users/williamnguatem/projects/LODViewer/game_content";
+#endif
+        
+#ifdef WIN32
+        const std::string game_content = "C:/williamnguatem/Projects/Simple3DViewer/game_content";
+#endif
+        
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "C:/williamnguatem/Projects/Simple3DViewer/game_content/CubeDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "C:/williamnguatem/Projects/Simple3DViewer/game_content/CubeDemo.frag"));
+		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content+"/CubeDemo.vert"));
+		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content+"/CubeDemo.frag"));
 		mShaderProgram.BuildProgram(shaders);
 
 

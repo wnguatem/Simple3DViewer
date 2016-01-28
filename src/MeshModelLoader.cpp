@@ -77,8 +77,20 @@ namespace Rendering
 
 		// Build the shader program
 		std::vector<ShaderDefinition> shaders;
-		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + "\\ModelDemo.vert"));
-		shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + "\\ModelDemo.frag"));
+#ifdef __APPLE__
+        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + "/ModelDemo.vert"));
+        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + "/ModelDemo.frag"));
+
+#endif
+        
+#ifdef WIN32
+        shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + "/ModelDemo.vert"));
+        shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + "/ModelDemo.frag"));
+
+#endif
+        
+        
+        
 		mShaderProgram.BuildProgram(shaders);
 
         
@@ -104,7 +116,19 @@ namespace Rendering
 		//std::string mesh_file("M:/DataSet/data19/1.obj");
 	
 		//        std::string points_file("/Volumes/Volume/DataSet/LODGEN/trainingData/data101/3.point");
-		std::string mesh_file("C:/williamnguatem/full3d_viewer/full3D_viewer/obj_samples/sibenik.ply");
+        
+        
+        
+#ifdef __APPLE__
+	//std::string mesh_file("/Users/williamnguatem/projects/full3D_viewer/obj_samples/sibenik.obj");
+        std::string mesh_file("/Users/williamnguatem/Documents/ArteVideo/mesh_haus1.ply");
+        
+#endif
+        
+#ifdef WIN32
+	//std::string mesh_file("C:/williamnguatem/full3d_viewer/full3D_viewer/obj_samples/sibenik.ply");
+        
+#endif
 	
         // Load the model
         std::unique_ptr<Model> model(new Model(*mGame, mesh_file, true));

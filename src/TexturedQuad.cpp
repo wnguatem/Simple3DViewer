@@ -53,7 +53,18 @@ namespace Rendering
         std::vector<ShaderDefinition> shaders;
      //   shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, "FilteringModesDemo.vert"));
      //   shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, "FilteringModesDemo.frag"));
-		const std::string game_content = "C:/williamnguatem/Projects/Simple3DViewer/game_content";
+//		const std::string game_content = "C:/williamnguatem/Projects/Simple3DViewer/game_content";
+        
+#ifdef __APPLE__
+        const std::string game_content = "/Users/williamnguatem/projects/LODViewer/game_content";
+#endif
+        
+#ifdef WIN32
+        const std::string game_content = "C:/williamnguatem/Projects/Simple3DViewer/game_content";
+#endif
+        
+        
+        
 		shaders.push_back(ShaderDefinition(GL_VERTEX_SHADER, game_content + "/AmbientLightingDemo.vert"));
 			shaders.push_back(ShaderDefinition(GL_FRAGMENT_SHADER, game_content + "/AmbientLightingDemo.frag"));
         mShaderProgram.BuildProgram(shaders);
