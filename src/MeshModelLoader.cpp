@@ -126,7 +126,9 @@ namespace Rendering
 #endif
         
 #ifdef WIN32
-	//std::string mesh_file("C:/williamnguatem/full3d_viewer/full3D_viewer/obj_samples/sibenik.ply");
+	std::string mesh_file("C:/williamnguatem/full3d_viewer/full3D_viewer/obj_samples/sibenik.ply");
+	//std::string mesh_file("Q:/DataSet/iccv_15/haus51_bonnland/mesh.ply");
+		
         
 #endif
 	

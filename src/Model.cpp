@@ -15,8 +15,8 @@ namespace Library
 		: mGame(game), mMeshes(), mMaterials()
     {
         Assimp::Importer importer;
-
-		unsigned int flags = aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType;
+		//flipUVs = false;
+		unsigned int flags = aiProcess_Triangulate;// | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType;
         if (flipUVs)
         {
             flags |= aiProcess_FlipUVs;
