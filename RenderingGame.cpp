@@ -109,6 +109,7 @@
 #include "FogDemo.h"
 #include "LineStrip.h"
 #include "MeshModelLoader.h"
+#include "AnimateClouds.h"
 
 
 using namespace glm;
@@ -180,7 +181,7 @@ namespace Rendering
         //mComponents.push_back(lodgenObjMesh);
 
 		mMeshModelLoader = new MeshModelLoader(*this, *mCamera);
-		mComponents.push_back(mMeshModelLoader);
+		//mComponents.push_back(mMeshModelLoader);
         
 
 		mTexturedQuad = new TexturedQuad(*this, *mCamera);
@@ -200,7 +201,10 @@ namespace Rendering
 		//mComponents.push_back(mPointDemo);
 
 		mCubeDemo = new CubeDemo(*this, *mCamera);
-		mComponents.push_back(mCubeDemo);
+		//mComponents.push_back(mCubeDemo);
+        mAnimateClouds = new AnimateClouds(*this, *mCamera);
+        mComponents.push_back(mAnimateClouds);
+        
 //
 //		mKMLModel = new KMLModeler(*this, *mCamera);
 //		mComponents.push_back(mKMLModel);

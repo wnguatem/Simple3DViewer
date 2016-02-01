@@ -52,7 +52,7 @@ namespace Rendering
 	class TexturedMeshloader;
     class TexturedOBJMeshloader;
 	class MeshModelLoader;
-    
+    class AnimateClouds;
 
 	class RenderingGame : public Game
 	{
@@ -100,6 +100,7 @@ namespace Rendering
         EnvironmentMappingDemo* mEnvironmentMappingDemo;
         FacadeFileModeler* mFacadeFileModeler;
 		MeshModelLoader *mMeshModelLoader;
+        AnimateClouds *mAnimateClouds;
 
 		TexturedMeshloader* lodgenMesh;
         TexturedOBJMeshloader* lodgenObjMesh;
