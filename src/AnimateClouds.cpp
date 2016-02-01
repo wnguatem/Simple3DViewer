@@ -150,12 +150,13 @@ namespace Rendering
         
         std::vector<std::string> animeFileNames;
         //load_all_clouds_to_animate("/Users/williamnguatem/DataSet/iccv_15/downsampled/gaus_sphere", animeFileNames);
-        load_all_clouds_to_animate("/Users/williamnguatem/DataSet/iccv_15/downsampled/haus_patches", animeFileNames);
+        load_all_clouds_to_animate("N:/DataSet/bonnlannPShule28_35/haus_patches", animeFileNames);
         
         
         for(size_t i = 0; i < animeFileNames.size(); i++)
         {
-            std::string filename = "/Users/williamnguatem/DataSet/iccv_15/downsampled/haus_patches/patches_cloud_"+boost::lexical_cast<std::string>(i)+".pcd";
+            //std::string filename = "/Users/williamnguatem/DataSet/iccv_15/downsampled/haus_patches/patches_cloud_"+boost::lexical_cast<std::string>(i)+".pcd";
+			std::string filename = "N:/DataSet/bonnlannPShule28_35/haus_patches/patches_cloud_"+boost::lexical_cast<std::string>(i)+".pcd";
             
             animeFileNames[i] = filename;
         }
@@ -298,7 +299,6 @@ namespace Rendering
 		using namespace std::placeholders;
 		mKeyboardHandler = std::bind(&AnimateClouds::OnKey, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		mGame->AddKeyboardHandler(mKeyboardHandler);
-
 
 ////        
 ////        TexturedOBJMeshloader(Game& game, Camera& camera, const Mesh &meshData, const std::string &textureFilename)
