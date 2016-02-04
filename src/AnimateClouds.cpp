@@ -150,13 +150,13 @@ namespace Rendering
         
         std::vector<std::string> animeFileNames;
         //load_all_clouds_to_animate("/Users/williamnguatem/DataSet/iccv_15/downsampled/gaus_sphere", animeFileNames);
-        load_all_clouds_to_animate("N:/DataSet/bonnlannPShule28_35/haus_patches", animeFileNames);
+        load_all_clouds_to_animate("Q:/DataSet/iccv_15/Ettlingen/patches_demo", animeFileNames);
         
         
         for(size_t i = 0; i < animeFileNames.size(); i++)
         {
             //std::string filename = "/Users/williamnguatem/DataSet/iccv_15/downsampled/haus_patches/patches_cloud_"+boost::lexical_cast<std::string>(i)+".pcd";
-			std::string filename = "N:/DataSet/bonnlannPShule28_35/haus_patches/patches_cloud_"+boost::lexical_cast<std::string>(i)+".pcd";
+			std::string filename = "Q:/DataSet/iccv_15/Ettlingen/patches_demo/patches_cloud_"+boost::lexical_cast<std::string>(i)+".pcd";
             
             animeFileNames[i] = filename;
         }
